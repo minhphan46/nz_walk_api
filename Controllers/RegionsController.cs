@@ -2,10 +2,11 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using UdemyProject1.CustomActionFilters;
 using UdemyProject1.Data;
 using UdemyProject1.Models.Domain;
 using UdemyProject1.Models.DTO;
-using UdemyProject1.Repositories.Implements;
+using UdemyProject1.Repositories.Interfaces;
 
 namespace UdemyProject1.Controllers
 {
@@ -49,6 +50,7 @@ namespace UdemyProject1.Controllers
 
         // POST: https://localhost:portnumber/api/regions
         [HttpPost]
+        [ValidateModel]
         public async Task<IActionResult> CreateRegion([FromBody] AddRegionRequestDto addRegionRequestDto)
         {
             var regionDomainModel = mapper.Map<Region>(addRegionRequestDto);
@@ -63,6 +65,7 @@ namespace UdemyProject1.Controllers
         // PUT: https://localhost:portnumber/api/regions/{id}
         [HttpPut]
         [Route("{regionId:Guid}")]
+        [ValidateModel]
         public async Task<IActionResult> UpdateRegion([FromRoute] Guid regionId, [FromBody] UpdateRegionRequestDto updateRegionRequestDto)
         {
             var regionDomainModel = mapper.Map<Region>(updateRegionRequestDto);

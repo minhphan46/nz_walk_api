@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using UdemyProject1.Data;
 using UdemyProject1.Models.Domain;
-using UdemyProject1.Repositories.Implements;
+using UdemyProject1.Repositories.Interfaces;
 
-namespace UdemyProject1.Repositories.Interfaces
+namespace UdemyProject1.Repositories.Implements
 {
     public class SQLRegionRepository : IRegionRepository
     {
@@ -21,7 +21,7 @@ namespace UdemyProject1.Repositories.Interfaces
             return region;
         }
 
-        public async Task<Region?> DeleteAsync(Guid id)
+        public async Task<Region> DeleteAsync(Guid id)
         {
             var existingRegion = await dbContext.Regions.FirstOrDefaultAsync(x => x.Id == id);
 
@@ -40,12 +40,12 @@ namespace UdemyProject1.Repositories.Interfaces
             return await dbContext.Regions.ToListAsync();
         }
 
-        public async Task<Region?> GetByIdAsync(Guid id)
+        public async Task<Region> GetByIdAsync(Guid id)
         {
             return await dbContext.Regions.FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        public async Task<Region?> UpdateAsync(Guid id, Region region)
+        public async Task<Region> UpdateAsync(Guid id, Region region)
         {
             var existingRegion = await dbContext.Regions.FirstOrDefaultAsync(x => x.Id == id);
 
