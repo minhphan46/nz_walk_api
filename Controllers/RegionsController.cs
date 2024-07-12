@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -13,6 +14,7 @@ namespace UdemyProject1.Controllers
     // https://localhost:portnumber/api/regions
     [Route("api/regions")]
     [ApiController]
+    [Authorize]
     public class RegionsController : ControllerBase
     {
         private readonly IRegionRepository regionRepository;
@@ -26,6 +28,7 @@ namespace UdemyProject1.Controllers
 
         // GET: https://localhost:portnumber/api/regions
         [HttpGet]
+        [Authorize(Roles = "Reader,Writer")]
         public async Task<IActionResult> GetAllRegions()
         {
             var regionsDomain = await regionRepository.GetAllAsync();
@@ -36,6 +39,7 @@ namespace UdemyProject1.Controllers
         // GET: https://localhost:portnumber/api/regions/{id}
         [HttpGet]
         [Route("{regionId:Guid}")]
+        [Authorize(Roles = "Reader,Writer")]
         public async Task<IActionResult> GetRegionById([FromRoute] Guid regionId)
         {
             var regionDomain = await regionRepository.GetByIdAsync(regionId);
@@ -51,6 +55,7 @@ namespace UdemyProject1.Controllers
         // POST: https://localhost:portnumber/api/regions
         [HttpPost]
         [ValidateModel]
+        [Authorize(Roles = "Writer")]
         public async Task<IActionResult> CreateRegion([FromBody] AddRegionRequestDto addRegionRequestDto)
         {
             var regionDomainModel = mapper.Map<Region>(addRegionRequestDto);
@@ -66,6 +71,7 @@ namespace UdemyProject1.Controllers
         [HttpPut]
         [Route("{regionId:Guid}")]
         [ValidateModel]
+        [Authorize(Roles = "Writer")]
         public async Task<IActionResult> UpdateRegion([FromRoute] Guid regionId, [FromBody] UpdateRegionRequestDto updateRegionRequestDto)
         {
             var regionDomainModel = mapper.Map<Region>(updateRegionRequestDto);
@@ -85,6 +91,7 @@ namespace UdemyProject1.Controllers
         // DELETE: https://localhost:portnumber/api/regions/{id}
         [HttpDelete]
         [Route("{regionId:Guid}")]
+        [Authorize(Roles = "Writer")]
         public async Task<IActionResult> DeleteRegion([FromRoute] Guid regionId)
         {
             var regionDomainModel = await regionRepository.DeleteAsync(regionId);

@@ -6,7 +6,7 @@ namespace UdemyProject1.Models.Domain
     {
         public Guid Id { get; set; }
 
-        [NotMapped]
+        [NotMapped] // Database ko chua file
         public IFormFile File { get; set; }
 
         public string FileName { get; set; }
