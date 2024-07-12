@@ -37,12 +37,12 @@ namespace UdemyProject1.Repositories.Implements
         }
 
         public async Task<List<Walk>> GetAllAsync(string? filterOn = null, string? filterQuery = null,
-            string? sortBy = null, bool isAscending = true, int pageNumber = 1, int pageSize = 1000)
+            string? sortBy = null, bool isAscending = true, int pageNumber = 1, int pageSize = 10)
         {
             var walks = dbContext.Walks.Include("Difficulty").Include("Region").AsQueryable();
 
             // Filtering
-            if (string.IsNullOrWhiteSpace(filterOn) == false && string.IsNullOrWhiteSpace(filterQuery) == false)
+            if (!string.IsNullOrWhiteSpace(filterOn) && !string.IsNullOrWhiteSpace(filterQuery))
             {
                 if (filterOn.Equals("Name", StringComparison.OrdinalIgnoreCase))
                 {
@@ -51,7 +51,7 @@ namespace UdemyProject1.Repositories.Implements
             }
 
             // Sorting 
-            if (string.IsNullOrWhiteSpace(sortBy) == false)
+            if (!string.IsNullOrWhiteSpace(sortBy))
             {
                 if (sortBy.Equals("Name", StringComparison.OrdinalIgnoreCase))
                 {

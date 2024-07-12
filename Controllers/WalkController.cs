@@ -19,28 +19,13 @@ namespace UdemyProject1.Controllers
             this.mapper = mapper;
             this.walkRepository = walkRepository;
         }
-
-        // CREATE Walk
-        // POST: /api/walks
-        [HttpPost]
-        [ValidateModel]
-        public async Task<IActionResult> Create([FromBody] AddWalkRequestDto addWalkRequestDto)
-        {
-            // Map DTO to Domain Model
-            var walkDomainModel = mapper.Map<Walk>(addWalkRequestDto);
-
-            await walkRepository.CreateAsync(walkDomainModel);
-
-            // Map Domain model to DTO
-            return Ok(mapper.Map<WalkDto>(walkDomainModel));
-        }
-
+        
         // GET Walks
         // GET: /api/walks?filterOn=Name&filterQuery=Track&sortBy=Name&isAscending=true&pageNumber=1&pageSize=10
         [HttpGet]
         public async Task<IActionResult> GetAll([FromQuery] string? filterOn, [FromQuery] string? filterQuery,
             [FromQuery] string? sortBy, [FromQuery] bool? isAscending,
-            [FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 1000)
+            [FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
         {
             var walksDomainModel = await walkRepository.GetAllAsync(filterOn, filterQuery, sortBy,
                     isAscending ?? true, pageNumber, pageSize);
@@ -65,6 +50,22 @@ namespace UdemyProject1.Controllers
             // Map Domain Model to DTO
             return Ok(mapper.Map<WalkDto>(walkDomainModel));
         }
+
+        // CREATE Walk
+        // POST: /api/walks
+        [HttpPost]
+        [ValidateModel]
+        public async Task<IActionResult> Create([FromBody] AddWalkRequestDto addWalkRequestDto)
+        {
+            // Map DTO to Domain Model
+            var walkDomainModel = mapper.Map<Walk>(addWalkRequestDto);
+
+            await walkRepository.CreateAsync(walkDomainModel);
+
+            // Map Domain model to DTO
+            return Ok(mapper.Map<WalkDto>(walkDomainModel));
+        }
+
 
         // Update Walk By Id
         // PUT: /api/Walks/{id}
