@@ -3,9 +3,12 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Net;
 using UdemyProject1.CustomActionFilters;
 using UdemyProject1.Data;
+using UdemyProject1.Helpers;
 using UdemyProject1.Models.Domain;
+using UdemyProject1.Models.DTO.Difficulty;
 using UdemyProject1.Models.DTO.Region;
 using UdemyProject1.Repositories.Interfaces;
 
@@ -33,7 +36,12 @@ namespace UdemyProject1.Controllers
         {
             var regionsDomain = await regionRepository.GetAllAsync();
 
-            return Ok(mapper.Map<List<RegionDto>>(regionsDomain));
+            var apiResponse = new APISucessResponse(
+                    statusCode: HttpStatusCode.OK,
+                    message: "Successfully get all regions",
+                    data: mapper.Map<List<RegionDto>>(regionsDomain)
+                );
+            return Ok(apiResponse);
         }
 
         // GET: https://localhost:portnumber/api/regions/{id}
@@ -48,8 +56,12 @@ namespace UdemyProject1.Controllers
             {
                 return NotFound();
             }
-
-            return Ok(mapper.Map<RegionDto>(regionDomain));
+            var apiResponse = new APISucessResponse(
+                    statusCode: HttpStatusCode.OK,
+                    message: "Successfully get region by id",
+                    data: mapper.Map<RegionDto>(regionDomain)
+                );
+            return Ok(apiResponse);
         }
 
         // POST: https://localhost:portnumber/api/regions
@@ -63,8 +75,12 @@ namespace UdemyProject1.Controllers
             regionDomainModel = await regionRepository.CreateAsync(regionDomainModel);
 
             var regionDto = mapper.Map<RegionDto>(regionDomainModel);
-
-            return CreatedAtAction(nameof(GetRegionById), new { regionId = regionDto.Id }, regionDto);
+            var apiResponse = new APISucessResponse(
+                    statusCode: HttpStatusCode.Created,
+                    message: "Successfully created region",
+                    data: regionDto
+                );
+            return CreatedAtAction(nameof(GetRegionById), new { regionId = regionDto.Id }, apiResponse);
         }
 
         // PUT: https://localhost:portnumber/api/regions/{id}
@@ -85,7 +101,13 @@ namespace UdemyProject1.Controllers
 
             var regionDto = mapper.Map<RegionDto>(regionDomainModel);
 
-            return Ok(regionDto);
+            var apiResponse = new APISucessResponse(
+                statusCode: HttpStatusCode.OK,
+                message: "Successfully updated region",
+                data: regionDto
+            );
+
+            return Ok(apiResponse);
         }
 
         // DELETE: https://localhost:portnumber/api/regions/{id}
@@ -103,7 +125,13 @@ namespace UdemyProject1.Controllers
 
             var regionDto = mapper.Map<RegionDto>(regionDomainModel);
 
-            return Ok(regionDto);
+            var apiResponse = new APISucessResponse(
+                statusCode: HttpStatusCode.OK,
+                message: "Successfully deleted difficulty",
+                data: regionDto
+            );
+
+            return Ok(apiResponse);
         }
     }
 }

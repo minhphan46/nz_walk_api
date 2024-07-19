@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using System.Net;
 using UdemyProject1.CustomActionFilters;
+using UdemyProject1.Helpers;
 using UdemyProject1.Models.Domain;
 using UdemyProject1.Models.DTO.Walk;
 using UdemyProject1.Repositories.Interfaces;
@@ -19,7 +21,7 @@ namespace UdemyProject1.Controllers
             this.mapper = mapper;
             this.walkRepository = walkRepository;
         }
-        
+
         // GET Walks
         // GET: /api/walks?filterOn=Name&filterQuery=Track&sortBy=Name&isAscending=true&pageNumber=1&pageSize=10
         [HttpGet]
@@ -31,7 +33,13 @@ namespace UdemyProject1.Controllers
                     isAscending ?? true, pageNumber, pageSize);
 
             // Map Domain Model to DTO
-            return Ok(mapper.Map<List<WalkDto>>(walksDomainModel));
+            var apiResponse = new APISucessResponse(
+                    statusCode: HttpStatusCode.OK,
+                    message: "Successfully get all walks",
+                    data: mapper.Map<List<WalkDto>>(walksDomainModel)
+                );
+
+            return Ok(apiResponse);
         }
 
         // Get Walk By Id
@@ -47,8 +55,14 @@ namespace UdemyProject1.Controllers
                 return NotFound();
             }
 
+            var apiResponse = new APISucessResponse(
+                statusCode: HttpStatusCode.OK,
+                message: "Successfully get walk by id",
+                data: mapper.Map<WalkDto>(walkDomainModel)
+            );
+
             // Map Domain Model to DTO
-            return Ok(mapper.Map<WalkDto>(walkDomainModel));
+            return Ok(apiResponse);
         }
 
         // CREATE Walk
@@ -62,8 +76,14 @@ namespace UdemyProject1.Controllers
 
             await walkRepository.CreateAsync(walkDomainModel);
 
+            var apiResponse = new APISucessResponse(
+                statusCode: HttpStatusCode.Created,
+                message: "Successfully created walk",
+                data: mapper.Map<WalkDto>(walkDomainModel)
+            );
+
             // Map Domain model to DTO
-            return Ok(mapper.Map<WalkDto>(walkDomainModel));
+            return Ok(apiResponse);
         }
 
 
@@ -85,8 +105,14 @@ namespace UdemyProject1.Controllers
                 return NotFound();
             }
 
+            var apiResponse = new APISucessResponse(
+                statusCode: HttpStatusCode.OK,
+                message: "Successfully updated walk",
+                data: mapper.Map<WalkDto>(walkDomainModel)
+            );
+
             // Map Domain Model to DTO
-            return Ok(mapper.Map<WalkDto>(walkDomainModel));
+            return Ok(apiResponse);
         }
 
 
@@ -103,8 +129,14 @@ namespace UdemyProject1.Controllers
                 return NotFound();
             }
 
+            var apiResponse = new APISucessResponse(
+                statusCode: HttpStatusCode.OK,
+                message: "Successfully deleted walk",
+                data: mapper.Map<WalkDto>(deletedWalkDomainModel)
+            );
+
             // Map Domain Model to DTO
-            return Ok(mapper.Map<WalkDto>(deletedWalkDomainModel));
+            return Ok(apiResponse);
         }
     }
 }

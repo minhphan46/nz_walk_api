@@ -1,12 +1,13 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using UdemyProject1.Helpers;
 using UdemyProject1.Models.DTO.Authentication;
 using UdemyProject1.Repositories.Interfaces;
 
 namespace UdemyProject1.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/auth")]
     [ApiController]
     public class AuthController : ControllerBase
     {
@@ -31,17 +32,24 @@ namespace UdemyProject1.Controllers
 
             var identityResult = await userManager.CreateAsync(identityUser, registerRequestDto.Password);
 
-            if (identityResult.Succeeded)
+            if (!identityResult.Succeeded)
             {
-                // Add roles to this User
-                if (registerRequestDto.Roles != null && registerRequestDto.Roles.Any())
-                {
-                    identityResult = await userManager.AddToRolesAsync(identityUser, registerRequestDto.Roles);
+                return BadRequest("Identity result failure");
+            }
 
-                    if (identityResult.Succeeded)
-                    {
-                        return Ok("User was registered! Please login.");
-                    }
+            // Add roles to this User
+            if (registerRequestDto.Roles != null && registerRequestDto.Roles.Any())
+            {
+                identityResult = await userManager.AddToRolesAsync(identityUser, registerRequestDto.Roles);
+
+                if (identityResult.Succeeded)
+                {
+                    var apiRespone = new APISucessResponse(
+                            statusCode: System.Net.HttpStatusCode.Created,
+                            message: "User was registered! Please login.",
+                            data: null
+                        );
+                    return Ok(apiRespone);
                 }
             }
 
@@ -78,7 +86,13 @@ namespace UdemyProject1.Controllers
                         AccessToken = jwtToken
                     };
 
-                    return Ok(response);
+                    var apiRespone = new APISucessResponse(
+                            statusCode: System.Net.HttpStatusCode.OK,
+                            message: "Successfully login",
+                            data: response
+                        );
+
+                    return Ok(apiRespone);
                 }
 
             }

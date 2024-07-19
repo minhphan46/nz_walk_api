@@ -1,12 +1,13 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using UdemyProject1.Helpers;
 using UdemyProject1.Models.Domain;
 using UdemyProject1.Models.DTO.Media;
 using UdemyProject1.Repositories.Interfaces;
 
 namespace UdemyProject1.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/media")]
     [ApiController]
     public class ImagesController : ControllerBase
     {
@@ -39,6 +40,11 @@ namespace UdemyProject1.Controllers
 
                 // User repository to upload image
                 await imageRepository.Upload(imageDomainModel);
+                var apiResponse = new APISucessResponse(
+                        statusCode: System.Net.HttpStatusCode.OK,
+                        message: "Successfully uploaded image",
+                        data: imageDomainModel
+                    );
 
                 return Ok(imageDomainModel);
 

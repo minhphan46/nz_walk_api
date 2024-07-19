@@ -3,11 +3,11 @@
 namespace UdemyProject1.Helpers
 {
     // success respone
-    public class APISuceesResponse
+    public class APISucessResponse
     {
-        public APISuceesResponse() { }
+        public APISucessResponse() { }
 
-        public APISuceesResponse(HttpStatusCode statusCode, string message, dynamic data)
+        public APISucessResponse(HttpStatusCode statusCode, string message, dynamic data)
         {
             StatusCode = statusCode;
             Message = message;

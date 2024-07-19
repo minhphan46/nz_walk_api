@@ -28,7 +28,7 @@ namespace UdemyProject1.Controllers
         public async Task<IActionResult> GetAllDifficulties()
         {
             var difficultyDomain = await difficultyRepository.GetAllAsync();
-            var apiResponse = new APISuceesResponse(
+            var apiResponse = new APISucessResponse(
                 statusCode: HttpStatusCode.OK,
                 message: "Successfully get all difficulties",
                 data: mapper.Map<List<DifficultyDto>>(difficultyDomain)
@@ -49,7 +49,7 @@ namespace UdemyProject1.Controllers
             }
 
             // return Ok(mapper.Map<DifficultyDto>(difficultyDomain));
-            var apiResponse = new APISuceesResponse(
+            var apiResponse = new APISucessResponse(
                 statusCode: HttpStatusCode.OK,
                 message: "Successfully get difficulty by id",
                 data: mapper.Map<DifficultyDto>(difficultyDomain)
@@ -69,7 +69,7 @@ namespace UdemyProject1.Controllers
             var difficultyDto = mapper.Map<DifficultyDto>(difficultyDomainModel);
 
             // return CreatedAtAction(nameof(GetDifficultyById), new { difficultyId = difficultyDto.Id }, difficultyDto);
-            var apiResponse = new APISuceesResponse(
+            var apiResponse = new APISucessResponse(
                 statusCode: HttpStatusCode.Created,
                 message: "Successfully created difficulty",
                 data: difficultyDto
@@ -94,7 +94,7 @@ namespace UdemyProject1.Controllers
 
             var difficultyDto = mapper.Map<DifficultyDto>(difficultyDomainModel);
 
-            var apiResponse = new APISuceesResponse(
+            var apiResponse = new APISucessResponse(
                 statusCode: HttpStatusCode.OK,
                 message: "Successfully updated difficulty",
                 data: difficultyDto
@@ -117,7 +117,7 @@ namespace UdemyProject1.Controllers
 
             var difficultyDto = mapper.Map<DifficultyDto>(difficultyDomainModel);
 
-            var apiResponse = new APISuceesResponse(
+            var apiResponse = new APISucessResponse(
                 statusCode: HttpStatusCode.OK,
                 message: "Successfully deleted difficulty",
                 data: difficultyDto
