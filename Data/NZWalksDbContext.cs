@@ -17,9 +17,25 @@ namespace UdemyProject1.Data
 
         public DbSet<Image> Images { get; set; }
 
+        public DbSet<Tag> Tags { get; set; }
+
+        public DbSet<WalkTag> WalkTags { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            // Many-to-many relationship between Walk and Tag
+            modelBuilder.Entity<WalkTag>()
+                .HasKey(wt => new { wt.WalkId, wt.TagId });
+            modelBuilder.Entity<WalkTag>()
+                .HasOne(wt => wt.Walk)
+                .WithMany(w => w.WalkTags)
+                .HasForeignKey(wt => wt.WalkId);
+            modelBuilder.Entity<WalkTag>()
+                .HasOne(wt => wt.Tag)
+                .WithMany(t => t.WalkTags)
+                .HasForeignKey(wt => wt.TagId);
 
             // Seed data for Difficulties
             // Easy, Medium, Hard
