@@ -16,6 +16,7 @@ namespace UdemyProject1.Mappings
             CreateMap<AddWalkRequestDto, Walk>().ReverseMap();
             CreateMap<Walk, WalkDto>().ReverseMap();
             CreateMap<Difficulty, DifficultyDto>().ReverseMap();
+            CreateMap<AddDifficultyDto, Difficulty>().ReverseMap();
             CreateMap<UpdateWalkRequestDto, Walk>().ReverseMap();
         }
     }

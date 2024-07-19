@@ -1,33 +1,62 @@
-﻿using UdemyProject1.Models.Domain;
+﻿using Microsoft.EntityFrameworkCore;
+using UdemyProject1.Data;
+using UdemyProject1.Models.Domain;
 using UdemyProject1.Repositories.Interfaces;
 
 namespace UdemyProject1.Repositories.Implements
 {
     public class SQLDifficultyRepository : IDifficultyRepository
     {
-        public Task<Difficulty> CreateAsync(Difficulty difficulty)
+        private readonly NZWalksDbContext dbContext;
+
+        public SQLDifficultyRepository(NZWalksDbContext dbContext)
         {
-            throw new NotImplementedException();
+            this.dbContext = dbContext;
+        }
+        public async Task<Difficulty> CreateAsync(Difficulty difficulty)
+        {
+            await dbContext.Difficulties.AddAsync(difficulty);
+            await dbContext.SaveChangesAsync();
+            return difficulty;
         }
 
-        public Task<Difficulty> DeleteAsync(Guid id)
+        public async Task<Difficulty> DeleteAsync(Guid id)
         {
-            throw new NotImplementedException();
+            var existingDifficulty = await dbContext.Difficulties.FirstOrDefaultAsync(x => x.Id == id);
+
+            if (existingDifficulty == null)
+            {
+                return null;
+            }
+
+            dbContext.Difficulties.Remove(existingDifficulty);
+            await dbContext.SaveChangesAsync();
+            return existingDifficulty;
         }
 
-        public Task<List<Difficulty>> GetAllAsync()
+        public async Task<List<Difficulty>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            return await dbContext.Difficulties.ToListAsync();
         }
 
-        public Task<Difficulty> GetByIdAsync(Guid id)
+        public async Task<Difficulty> GetByIdAsync(Guid id)
         {
-            throw new NotImplementedException();
+            return await dbContext.Difficulties.FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        public Task<Difficulty> UpdateAsync(Guid id, Difficulty difficulty)
+        public async Task<Difficulty> UpdateAsync(Guid id, Difficulty difficulty)
         {
-            throw new NotImplementedException();
+            var existingDifficulty = await dbContext.Difficulties.FirstOrDefaultAsync(x => x.Id == id);
+
+            if (existingDifficulty == null)
+            {
+                return null;
+            }
+
+            existingDifficulty.Name = difficulty.Name;
+
+            await dbContext.SaveChangesAsync();
+            return existingDifficulty;
         }
     }
 }

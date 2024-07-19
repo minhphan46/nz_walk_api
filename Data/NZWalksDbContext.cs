@@ -37,6 +37,14 @@ namespace UdemyProject1.Data
                 .WithMany(t => t.WalkTags)
                 .HasForeignKey(wt => wt.TagId);
 
+            // One to One relationship between Walk and Difficulty
+            modelBuilder.Entity<Walk>()
+                .HasOne(w => w.Difficulty);
+
+            // One to One relationship between Walk and Region
+            modelBuilder.Entity<Walk>()
+                .HasOne(w => w.Region);
+
             // Seed data for Difficulties
             // Easy, Medium, Hard
             var difficulties = new List<Difficulty>()
