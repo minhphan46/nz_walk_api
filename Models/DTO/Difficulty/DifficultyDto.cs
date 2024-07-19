@@ -1,4 +1,4 @@
-﻿namespace UdemyProject1.Models.DTO
+﻿namespace UdemyProject1.Models.DTO.Difficulty
 {
     public class DifficultyDto
     {

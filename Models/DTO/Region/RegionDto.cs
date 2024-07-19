@@ -1,4 +1,4 @@
-﻿namespace UdemyProject1.Models.DTO
+﻿namespace UdemyProject1.Models.DTO.Region
 {
     public class RegionDto
     {
@@ -8,6 +8,6 @@
 
         public string Name { get; set; }
 
-        public string? RegionImageUrl { get; set; }
+        public string RegionImageUrl { get; set; }
     }
 }

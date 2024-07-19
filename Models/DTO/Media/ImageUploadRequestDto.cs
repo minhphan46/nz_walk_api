@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace UdemyProject1.Models.DTO
+namespace UdemyProject1.Models.DTO.Media
 {
     public class ImageUploadRequestDto
     {
@@ -10,6 +10,6 @@ namespace UdemyProject1.Models.DTO
         [Required]
         public string FileName { get; set; }
 
-        public string? FileDescription { get; set; }
+        public string FileDescription { get; set; }
     }
 }

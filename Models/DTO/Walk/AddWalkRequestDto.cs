@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace UdemyProject1.Models.DTO
+namespace UdemyProject1.Models.DTO.Walk
 {
     public class AddWalkRequestDto
     {
@@ -15,7 +15,7 @@ namespace UdemyProject1.Models.DTO
         [Required]
         [Range(0, 50)]
         public double LengthInKm { get; set; }
-        public string? WalkImageUrl { get; set; }
+        public string WalkImageUrl { get; set; }
         [Required]
         public Guid DifficultyId { get; set; }
         [Required]

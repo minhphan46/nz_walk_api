@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using UdemyProject1.Models.Domain;
-using UdemyProject1.Models.DTO;
+using UdemyProject1.Models.DTO.Difficulty;
+using UdemyProject1.Models.DTO.Region;
+using UdemyProject1.Models.DTO.Walk;
 
 namespace UdemyProject1.Mappings
 {

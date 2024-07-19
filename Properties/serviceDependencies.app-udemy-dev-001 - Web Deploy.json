@@ -1,0 +1,19 @@
+{
+  "dependencies": {
+    "mssql1": {
+      "serviceConnectorResourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Web/sites/app-udemy-dev-001/providers/Microsoft.ServiceLinker/linkers/ConnectionStringsNZWalksConnectionString_E59E27DA11",
+      "secretStore": "AzureAppSettings",
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Sql/servers/sqlserver-udemy-dev-001/databases/sqldb-udemy-dev-001",
+      "type": "mssql.azure",
+      "connectionId": "ConnectionStrings:NZWalksConnectionString",
+      "dynamicId": null
+    },
+    "mssql2": {
+      "serviceConnectorResourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Web/sites/app-udemy-dev-001/providers/Microsoft.ServiceLinker/linkers/ConnectionStringsNZWalksAuthConnectionSt_E4263AA8EA",
+      "secretStore": "AzureAppSettings",
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Sql/servers/sqlserver-udemy-dev-001/databases/sqldb-udemy-dev-001",
+      "type": "mssql.azure",
+      "connectionId": "ConnectionStrings:NZWalksAuthConnectionString"
+    }
+  }
+}
