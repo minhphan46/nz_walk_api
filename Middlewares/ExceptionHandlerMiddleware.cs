@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using System.Net;
+using UdemyProject1.Helpers;
 
 namespace UdemyProject1.Middlewares
 {
@@ -24,22 +25,21 @@ namespace UdemyProject1.Middlewares
             }
             catch (Exception ex)
             {
-                var errorId = Guid.NewGuid();
+                var errorResponse = new APIErrorResponse(
+                       id: Guid.NewGuid(),
+                       statusCode: HttpStatusCode.InternalServerError,
+                       message: "Something went wrong! We are looking into resolving this.",
+                       errors: new List<string>() { ex.Message }
+                    );
 
                 // Log This Exception
-                logger.LogError(ex, $"{errorId} : {ex.Message}");
+                logger.LogError(ex, $"{errorResponse} : {ex.Message}");
 
                 // Return A Custom Exrror Response
                 httpContext.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
                 httpContext.Response.ContentType = "application/json";
 
-                var error = new
-                {
-                    Id = errorId,
-                    ErrorMessage = "Something went wrong! We are looking into resolving this."
-                };
-
-                await httpContext.Response.WriteAsJsonAsync(error);
+                await httpContext.Response.WriteAsJsonAsync(errorResponse);
             }
         }
     }

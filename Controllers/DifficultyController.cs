@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Net;
 using UdemyProject1.CustomActionFilters;
+using UdemyProject1.Helpers;
 using UdemyProject1.Models.Domain;
 using UdemyProject1.Models.DTO.Difficulty;
 using UdemyProject1.Repositories.Interfaces;
@@ -26,7 +28,12 @@ namespace UdemyProject1.Controllers
         public async Task<IActionResult> GetAllDifficulties()
         {
             var difficultyDomain = await difficultyRepository.GetAllAsync();
-            return Ok(mapper.Map<List<DifficultyDto>>(difficultyDomain));
+            var apiResponse = new APISuceesResponse(
+                statusCode: HttpStatusCode.OK,
+                message: "Successfully get all difficulties",
+                data: mapper.Map<List<DifficultyDto>>(difficultyDomain)
+            );
+            return Ok(apiResponse);
         }
 
         // GET: https://localhost:portnumber/api/difficulties/{id}
@@ -41,7 +48,13 @@ namespace UdemyProject1.Controllers
                 return NotFound();
             }
 
-            return Ok(mapper.Map<DifficultyDto>(difficultyDomain));
+            // return Ok(mapper.Map<DifficultyDto>(difficultyDomain));
+            var apiResponse = new APISuceesResponse(
+                statusCode: HttpStatusCode.OK,
+                message: "Successfully get difficulty by id",
+                data: mapper.Map<DifficultyDto>(difficultyDomain)
+            );
+            return Ok(apiResponse);
         }
 
         // POST: https://localhost:portnumber/api/difficulties
@@ -55,7 +68,13 @@ namespace UdemyProject1.Controllers
 
             var difficultyDto = mapper.Map<DifficultyDto>(difficultyDomainModel);
 
-            return CreatedAtAction(nameof(GetDifficultyById), new { difficultyId = difficultyDto.Id }, difficultyDto);
+            // return CreatedAtAction(nameof(GetDifficultyById), new { difficultyId = difficultyDto.Id }, difficultyDto);
+            var apiResponse = new APISuceesResponse(
+                statusCode: HttpStatusCode.Created,
+                message: "Successfully created difficulty",
+                data: difficultyDto
+            );
+            return CreatedAtAction(nameof(GetDifficultyById), new { difficultyId = difficultyDto.Id }, apiResponse);
         }
 
         // PUT: https://localhost:portnumber/api/difficulties/{id}
@@ -75,7 +94,13 @@ namespace UdemyProject1.Controllers
 
             var difficultyDto = mapper.Map<DifficultyDto>(difficultyDomainModel);
 
-            return Ok(difficultyDto);
+            var apiResponse = new APISuceesResponse(
+                statusCode: HttpStatusCode.OK,
+                message: "Successfully updated difficulty",
+                data: difficultyDto
+            );
+
+            return Ok(apiResponse);
         }
 
         // DELETE: https://localhost:portnumber/api/difficulties/{id}
@@ -92,7 +117,13 @@ namespace UdemyProject1.Controllers
 
             var difficultyDto = mapper.Map<DifficultyDto>(difficultyDomainModel);
 
-            return Ok(difficultyDto);
+            var apiResponse = new APISuceesResponse(
+                statusCode: HttpStatusCode.OK,
+                message: "Successfully deleted difficulty",
+                data: difficultyDto
+            );
+
+            return Ok(apiResponse);
         }
     }
 }
