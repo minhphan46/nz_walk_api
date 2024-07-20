@@ -6,6 +6,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Serilog;
 using System.Text;
+using System.Text.Json.Serialization;
 using UdemyProject1.Data;
 using UdemyProject1.Mappings;
 using UdemyProject1.Middlewares;
@@ -29,6 +30,9 @@ builder.Logging.AddSerilog(logger);
 // Configuration
 builder.Services.AddControllers();
 builder.Services.AddHttpContextAccessor();
+builder.Services.AddControllers().AddJsonOptions(x =>
+                x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 // Swagger
 builder.Services.AddEndpointsApiExplorer();
@@ -76,6 +80,7 @@ builder.Services.AddScoped<IWalkRepository, SQLWalkRepository>();
 builder.Services.AddScoped<ITokenRepository, TokenRepository>();
 builder.Services.AddScoped<IImageRepository, LocalImageRepository>();
 builder.Services.AddScoped<IDifficultyRepository, SQLDifficultyRepository>();
+builder.Services.AddScoped<ITagRepository, SQLTagRepository>();
 
 // AutoMapper
 builder.Services.AddAutoMapper(typeof(AutoMapperProfiles));
@@ -116,10 +121,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-//if (app.Environment.IsDevelopment())
-//{
-
-//}
+//if (app.Environment.IsDevelopment()){}
 
 app.UseSwagger();
 app.UseSwaggerUI();

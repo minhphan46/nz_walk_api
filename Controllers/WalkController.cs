@@ -74,7 +74,7 @@ namespace UdemyProject1.Controllers
             // Map DTO to Domain Model
             var walkDomainModel = mapper.Map<Walk>(addWalkRequestDto);
 
-            await walkRepository.CreateAsync(walkDomainModel);
+            await walkRepository.CreateAsync(walkDomainModel, addWalkRequestDto.TagId);
 
             var apiResponse = new APISucessResponse(
                 statusCode: HttpStatusCode.Created,

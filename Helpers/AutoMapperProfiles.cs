@@ -3,6 +3,7 @@ using UdemyProject1.Helpers;
 using UdemyProject1.Models.Domain;
 using UdemyProject1.Models.DTO.Difficulty;
 using UdemyProject1.Models.DTO.Region;
+using UdemyProject1.Models.DTO.Tag;
 using UdemyProject1.Models.DTO.Walk;
 
 namespace UdemyProject1.Mappings
@@ -19,6 +20,8 @@ namespace UdemyProject1.Mappings
             CreateMap<Difficulty, DifficultyDto>().ReverseMap();
             CreateMap<AddDifficultyDto, Difficulty>().ReverseMap();
             CreateMap<UpdateWalkRequestDto, Walk>().ReverseMap();
+            CreateMap<Tag, TagDto>().ReverseMap();
+            CreateMap<AddTagDto, Tag>().ReverseMap();
         }
     }
 }

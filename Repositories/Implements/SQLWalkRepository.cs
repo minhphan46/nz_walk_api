@@ -15,8 +15,25 @@ namespace UdemyProject1.Repositories.Implements
         }
 
 
-        public async Task<Walk> CreateAsync(Walk walk)
+        public async Task<Walk> CreateAsync(Walk walk, Guid tagId)
         {
+            var tagEntity = dbContext.Tags.Where(t => t.Id == tagId).FirstOrDefault();
+
+            if (tagEntity == null)
+            {
+                return null;
+            }
+
+            var walkTag = new WalkTag()
+            {
+                TagId = tagId,
+                WalkId = walk.Id,
+                Tag = tagEntity,
+                Walk = walk
+            };
+
+            await dbContext.WalkTags.AddAsync(walkTag);
+
             await dbContext.Walks.AddAsync(walk);
             await dbContext.SaveChangesAsync();
             return walk;
@@ -30,6 +47,9 @@ namespace UdemyProject1.Repositories.Implements
             {
                 return null;
             }
+            // remove all walk tags associated with this walk
+            var walkTags = dbContext.WalkTags.Where(wt => wt.WalkId == id).ToList();
+            dbContext.WalkTags.RemoveRange(walkTags);
 
             dbContext.Walks.Remove(existingWalk);
             await dbContext.SaveChangesAsync();
@@ -39,7 +59,7 @@ namespace UdemyProject1.Repositories.Implements
         public async Task<List<Walk>> GetAllAsync(string? filterOn = null, string? filterQuery = null,
             string? sortBy = null, bool isAscending = true, int pageNumber = 1, int pageSize = 10)
         {
-            var walks = dbContext.Walks.Include("Difficulty").Include("Region").AsQueryable();
+            var walks = dbContext.Walks.Include("Difficulty").Include("Region");
 
             // Filtering
             if (!string.IsNullOrWhiteSpace(filterOn) && !string.IsNullOrWhiteSpace(filterQuery))
@@ -73,8 +93,10 @@ namespace UdemyProject1.Repositories.Implements
         public async Task<Walk?> GetByIdAsync(Guid id)
         {
             return await dbContext.Walks
-                .Include("Difficulty")
-                .Include("Region")
+                .Include(w => w.Difficulty)
+                .Include(w => w.Region)
+                .Include(w => w.WalkTags)
+                .ThenInclude(wt => wt.Tag)
                 .FirstOrDefaultAsync(x => x.Id == id);
         }
 

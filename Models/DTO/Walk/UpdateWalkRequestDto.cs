@@ -20,5 +20,7 @@ namespace UdemyProject1.Models.DTO.Walk
         public Guid DifficultyId { get; set; }
         [Required]
         public Guid RegionId { get; set; }
+        [Required]
+        public Guid TagId { get; set; }
     }
 }
