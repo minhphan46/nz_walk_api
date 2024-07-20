@@ -12,26 +12,23 @@ builder.Services.AddHttpContextAccessor();
 
 // Database
 builder.Services.AddDbContext<NZWalksDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("NZWalksConnectionString"))
+    options.UseSqlServer(builder.Configuration.GetConnectionString("ConnectionString"))
 );
 builder.Services.AddDbContext<NZWalksAuthDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("NZWalksAuthConnectionString"))
+    options.UseSqlServer(builder.Configuration.GetConnectionString("AuthConnectionString"))
 );
 
 // builder 
-
 builder = LoggerServices.AppBuilder(builder);
 
 builder = RestfulAppServices.AppBuilder(builder);
 
 builder = GraphQLAppServices.AppBuilder(builder);
 
-// App 
+// App builder
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 //if (app.Environment.IsDevelopment()){}
-
 app.UseSwagger();
 app.UseSwaggerUI();
 
