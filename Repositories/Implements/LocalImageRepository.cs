@@ -22,7 +22,7 @@ namespace UdemyProject1.Repositories.Implements
 
         public async Task<Image> Upload(Image image)
         {
-            var localFilePath = Path.Combine(webHostEnvironment.ContentRootPath, "Images",
+            var localFilePath = System.IO.Path.Combine(webHostEnvironment.ContentRootPath, "Images",
                 $"{image.FileName}{image.FileExtension}");
 
             // Upload Image to Local Path

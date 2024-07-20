@@ -1,12 +1,12 @@
 ﻿namespace UdemyProject1.Models.Domain
 {
-    public class WalkTag
+    public class WalkCategory
     {
         public Guid WalkId { get; set; }
-        public Guid TagId { get; set; }
+        public Guid CategoryId { get; set; }
 
         // Navigation properties
         public Walk Walk { get; set; }
-        public Tag Tag { get; set; }
+        public Category Category { get; set; }
     }
 }

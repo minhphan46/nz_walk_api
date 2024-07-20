@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace UdemyProject1.Models.DTO.TagModel
+namespace UdemyProject1.Models.DTO.CategoryModel
 {
-    public class AddTagDto
+    public class AddCategoryDto
     {
         [Required]
         [MaxLength(100, ErrorMessage = "Name has to be a maximum of 100 characters")]

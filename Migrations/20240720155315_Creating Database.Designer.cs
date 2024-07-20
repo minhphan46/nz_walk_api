@@ -12,8 +12,8 @@ using UdemyProject1.Data;
 namespace UdemyProject1.Migrations
 {
     [DbContext(typeof(NZWalksDbContext))]
-    [Migration("20240719044135_Initial Migration relationship")]
-    partial class InitialMigrationrelationship
+    [Migration("20240720155315_Creating Database")]
+    partial class CreatingDatabase
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,6 +24,20 @@ namespace UdemyProject1.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("UdemyProject1.Models.Domain.Category", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Categories");
+                });
 
             modelBuilder.Entity("UdemyProject1.Models.Domain.Difficulty", b =>
                 {
@@ -143,20 +157,6 @@ namespace UdemyProject1.Migrations
                         });
                 });
 
-            modelBuilder.Entity("UdemyProject1.Models.Domain.Tag", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Tags");
-                });
-
             modelBuilder.Entity("UdemyProject1.Models.Domain.Walk", b =>
                 {
                     b.Property<Guid>("Id")
@@ -190,19 +190,19 @@ namespace UdemyProject1.Migrations
                     b.ToTable("Walks");
                 });
 
-            modelBuilder.Entity("UdemyProject1.Models.Domain.WalkTag", b =>
+            modelBuilder.Entity("UdemyProject1.Models.Domain.WalkCategory", b =>
                 {
                     b.Property<Guid>("WalkId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("TagId")
+                    b.Property<Guid>("CategoryId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("WalkId", "TagId");
+                    b.HasKey("WalkId", "CategoryId");
 
-                    b.HasIndex("TagId");
+                    b.HasIndex("CategoryId");
 
-                    b.ToTable("WalkTags");
+                    b.ToTable("WalkCategories");
                 });
 
             modelBuilder.Entity("UdemyProject1.Models.Domain.Walk", b =>
@@ -224,33 +224,33 @@ namespace UdemyProject1.Migrations
                     b.Navigation("Region");
                 });
 
-            modelBuilder.Entity("UdemyProject1.Models.Domain.WalkTag", b =>
+            modelBuilder.Entity("UdemyProject1.Models.Domain.WalkCategory", b =>
                 {
-                    b.HasOne("UdemyProject1.Models.Domain.Tag", "Tag")
-                        .WithMany("WalkTags")
-                        .HasForeignKey("TagId")
+                    b.HasOne("UdemyProject1.Models.Domain.Category", "Category")
+                        .WithMany("WalkCategories")
+                        .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("UdemyProject1.Models.Domain.Walk", "Walk")
-                        .WithMany("WalkTags")
+                        .WithMany("WalkCategories")
                         .HasForeignKey("WalkId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Tag");
+                    b.Navigation("Category");
 
                     b.Navigation("Walk");
                 });
 
-            modelBuilder.Entity("UdemyProject1.Models.Domain.Tag", b =>
+            modelBuilder.Entity("UdemyProject1.Models.Domain.Category", b =>
                 {
-                    b.Navigation("WalkTags");
+                    b.Navigation("WalkCategories");
                 });
 
             modelBuilder.Entity("UdemyProject1.Models.Domain.Walk", b =>
                 {
-                    b.Navigation("WalkTags");
+                    b.Navigation("WalkCategories");
                 });
 #pragma warning restore 612, 618
         }

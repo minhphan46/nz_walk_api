@@ -14,6 +14,6 @@
         // Navigation properties
         public Difficulty Difficulty { get; set; }
         public Region Region { get; set; }
-        public ICollection<WalkTag> WalkTags { get; set; }
+        public ICollection<WalkCategory> WalkCategories { get; set; }
     }
 }

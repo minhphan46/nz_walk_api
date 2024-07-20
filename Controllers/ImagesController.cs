@@ -3,6 +3,7 @@ using UdemyProject1.Helpers;
 using UdemyProject1.Models.Domain;
 using UdemyProject1.Models.DTO.MediaModel;
 using UdemyProject1.Repositories.Interfaces;
+using Path = System.IO.Path;
 
 namespace UdemyProject1.Controllers
 {
@@ -30,7 +31,7 @@ namespace UdemyProject1.Controllers
                 var imageDomainModel = new Image
                 {
                     File = request.File,
-                    FileExtension = Path.GetExtension(request.File.FileName),
+                    FileExtension = System.IO.Path.GetExtension(request.File.FileName),
                     FileSizeInBytes = request.File.Length,
                     FileName = request.FileName,
                     FileDescription = request.FileDescription,

@@ -1,11 +1,10 @@
 ﻿using AutoMapper;
-using UdemyProject1.Helpers;
 using UdemyProject1.Models.Domain;
 using UdemyProject1.Models.DTO.DifficultyModel;
 using UdemyProject1.Models.DTO.RegionModel;
-using UdemyProject1.Models.DTO.TagModel;
+using UdemyProject1.Models.DTO.CategoryModel;
 using UdemyProject1.Models.DTO.WalkModel;
-using UdemyProject1.Models.DTO.WalkTagModel;
+using UdemyProject1.Models.DTO.WalkCategoryModel;
 
 namespace UdemyProject1.Mappings
 {
@@ -18,15 +17,15 @@ namespace UdemyProject1.Mappings
             CreateMap<UpdateRegionRequestDto, Region>().ReverseMap();
             CreateMap<AddWalkRequestDto, Walk>().ReverseMap();
             CreateMap<Walk, WalkDto>()
-                .ForMember(x => x.Tags, opt => opt.MapFrom(x => x.WalkTags))
+                .ForMember(x => x.Categories, opt => opt.MapFrom(x => x.WalkCategories))
                 .ReverseMap();
             CreateMap<Difficulty, DifficultyDto>().ReverseMap();
             CreateMap<AddDifficultyDto, Difficulty>().ReverseMap();
             CreateMap<UpdateWalkRequestDto, Walk>().ReverseMap();
-            CreateMap<Tag, TagDto>().ReverseMap();
-            CreateMap<AddTagDto, Tag>().ReverseMap();
-            CreateMap<WalkTag, WalkTagDto>()
-                .ForMember(dest => dest.Tag, opt => opt.MapFrom(src => src.Tag))
+            CreateMap<Category, CategoryDto>().ReverseMap();
+            CreateMap<AddCategoryDto, Category>().ReverseMap();
+            CreateMap<WalkCategory, WalkCategoryDto>()
+                .ForMember(dest => dest.Category, opt => opt.MapFrom(src => src.Category))
                 .ReverseMap();
         }
     }

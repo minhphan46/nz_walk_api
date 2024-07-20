@@ -21,6 +21,6 @@ namespace UdemyProject1.Models.DTO.WalkModel
         [Required]
         public Guid RegionId { get; set; }
         [Required]
-        public Guid TagId { get; set; }
+        public Guid CategoryId { get; set; }
     }
 }

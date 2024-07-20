@@ -15,24 +15,24 @@ namespace UdemyProject1.Repositories.Implements
         }
 
 
-        public async Task<Walk> CreateAsync(Walk walk, Guid tagId)
+        public async Task<Walk> CreateAsync(Walk walk, Guid categoryId)
         {
-            var tagEntity = dbContext.Tags.Where(t => t.Id == tagId).FirstOrDefault();
+            var categoryEntity = dbContext.Categories.Where(t => t.Id == categoryId).FirstOrDefault();
 
-            if (tagEntity == null)
+            if (categoryEntity == null)
             {
                 return null;
             }
 
-            var walkTag = new WalkTag()
+            var walkCategory = new WalkCategory()
             {
-                TagId = tagId,
+                CategoryId = categoryId,
                 WalkId = walk.Id,
-                Tag = tagEntity,
+                Category = categoryEntity,
                 Walk = walk
             };
 
-            await dbContext.WalkTags.AddAsync(walkTag);
+            await dbContext.WalkCategories.AddAsync(walkCategory);
 
             await dbContext.Walks.AddAsync(walk);
             await dbContext.SaveChangesAsync();
@@ -47,9 +47,9 @@ namespace UdemyProject1.Repositories.Implements
             {
                 return null;
             }
-            // remove all walk tags associated with this walk
-            var walkTags = dbContext.WalkTags.Where(wt => wt.WalkId == id).ToList();
-            dbContext.WalkTags.RemoveRange(walkTags);
+            // remove all walk categorys associated with this walk
+            var walkCategories = dbContext.WalkCategories.Where(wt => wt.WalkId == id).ToList();
+            dbContext.WalkCategories.RemoveRange(walkCategories);
 
             dbContext.Walks.Remove(existingWalk);
             await dbContext.SaveChangesAsync();
@@ -86,7 +86,12 @@ namespace UdemyProject1.Repositories.Implements
             // Pagination
             var skipResults = (pageNumber - 1) * pageSize;
 
-            return await walks.Skip(skipResults).Take(pageSize).ToListAsync();
+            return await walks
+                .Skip(skipResults)
+                .Take(pageSize)
+                .Include(w => w.WalkCategories)
+                .ThenInclude(wt => wt.Category)
+                .ToListAsync();
             //return await dbContext.Walks.Include("Difficulty").Include("Region").ToListAsync();
         }
 
@@ -95,8 +100,8 @@ namespace UdemyProject1.Repositories.Implements
             return await dbContext.Walks
                 .Include(w => w.Difficulty)
                 .Include(w => w.Region)
-                .Include(w => w.WalkTags)
-                .ThenInclude(wt => wt.Tag)
+                .Include(w => w.WalkCategories)
+                .ThenInclude(wt => wt.Category)
                 .FirstOrDefaultAsync(x => x.Id == id);
         }
 
