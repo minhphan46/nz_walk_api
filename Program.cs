@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
-using UdemyProject1.DbContexts;
+using UdemyProject1.Data.DbContexts;
 using UdemyProject1.GraphQL.GraphQLAppServices;
 using UdemyProject1.Loggers;
 using UdemyProject1.Middlewares;
@@ -32,17 +32,19 @@ var app = builder.Build();
 app.UseSwagger();
 app.UseSwaggerUI();
 
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    var dbContext = services.GetRequiredService<NZWalksDbContext>();
+    dbContext?.Database.EnsureCreated();
+}
+
 app.UseMiddleware<ExceptionHandlerMiddleware>();
 
 app.UseHttpsRedirection();
 
 app.UseAuthentication();
 app.UseAuthorization();
-
-//app.UseEndpoints(endpoints =>
-//{
-//    endpoints.MapGraphQL();
-//});
 
 app.UseStaticFiles(new StaticFileOptions
 {
@@ -51,5 +53,7 @@ app.UseStaticFiles(new StaticFileOptions
 });
 
 app.MapControllers();
+
+app.MapGraphQL();
 
 app.Run();

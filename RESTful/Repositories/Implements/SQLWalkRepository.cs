@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using UdemyProject1.DbContexts;
+using UdemyProject1.Data.DbContexts;
 using UdemyProject1.Entities;
 using UdemyProject1.RESTful.Repositories.Interfaces;
 

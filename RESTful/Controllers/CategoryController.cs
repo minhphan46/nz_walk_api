@@ -23,7 +23,7 @@ namespace UdemyProject1.RESTful.Controllers
 
         // GET: https://localhost:portnumber/api/categories
         [HttpGet]
-        public async Task<IActionResult> GetAllDifficulties()
+        public async Task<IActionResult> GetAllCatergories()
         {
             var categoryDomain = await categoryRepository.GetAllAsync();
             var apiResponse = new APISucessResponse(

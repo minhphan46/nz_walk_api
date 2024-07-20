@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace UdemyProject1.DbContexts
+namespace UdemyProject1.Data.DbContexts
 {
     public class NZWalksAuthDbContext : IdentityDbContext
     {

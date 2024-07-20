@@ -4,7 +4,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
 using System.Text.Json.Serialization;
-using UdemyProject1.DbContexts;
+using UdemyProject1.Data.DbContexts;
 using UdemyProject1.RESTful.Helpers;
 using UdemyProject1.RESTful.Repositories.Implements;
 using UdemyProject1.RESTful.Repositories.Interfaces;
