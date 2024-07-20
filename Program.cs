@@ -1,70 +1,14 @@
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
-using Microsoft.IdentityModel.Tokens;
-using Microsoft.OpenApi.Models;
-using Serilog;
-using System.Text;
-using System.Text.Json.Serialization;
 using UdemyProject1.DbContexts;
+using UdemyProject1.GraphQL.GraphQLAppServices;
+using UdemyProject1.Loggers;
 using UdemyProject1.Middlewares;
-using UdemyProject1.RESTful.Helpers;
-using UdemyProject1.RESTful.Repositories.Implements;
-using UdemyProject1.RESTful.Repositories.Interfaces;
+using UdemyProject1.RESTful.RestfulAppServices;
 
 var builder = WebApplication.CreateBuilder(args);
 
-/// Add services to the container.
-
-// Logger
-var logger = new LoggerConfiguration()
-    .WriteTo.Console()
-    // .WriteTo.File("Logs/NzWalks_Log.txt", rollingInterval: RollingInterval.Minute)
-    .MinimumLevel.Warning()
-    .CreateLogger();
-
-builder.Logging.ClearProviders();
-builder.Logging.AddSerilog(logger);
-
-// Configuration
-builder.Services.AddControllers();
 builder.Services.AddHttpContextAccessor();
-builder.Services.AddControllers().AddJsonOptions(x =>
-                x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
-builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-
-// Swagger
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(options =>
-{
-    options.SwaggerDoc("v1", new OpenApiInfo { Title = "NZ Walks API", Version = "v1" });
-    options.AddSecurityDefinition(JwtBearerDefaults.AuthenticationScheme, new OpenApiSecurityScheme
-    {
-        Name = "Authorization",
-        In = ParameterLocation.Header,
-        Type = SecuritySchemeType.ApiKey,
-        Scheme = JwtBearerDefaults.AuthenticationScheme
-    });
-
-    options.AddSecurityRequirement(new OpenApiSecurityRequirement
-    {
-        {
-            new OpenApiSecurityScheme
-            {
-                Reference = new OpenApiReference
-                {
-                    Type = ReferenceType.SecurityScheme,
-                    Id = JwtBearerDefaults.AuthenticationScheme
-                },
-                Scheme = "Oauth2",
-                Name = JwtBearerDefaults.AuthenticationScheme,
-                In = ParameterLocation.Header
-            },
-            new List<string>()
-        }
-    });
-});
 
 // Database
 builder.Services.AddDbContext<NZWalksDbContext>(options =>
@@ -74,49 +18,13 @@ builder.Services.AddDbContext<NZWalksAuthDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("NZWalksAuthConnectionString"))
 );
 
-// Repositories
-builder.Services.AddScoped<IRegionRepository, SQLRegionRepository>();
-builder.Services.AddScoped<IWalkRepository, SQLWalkRepository>();
-builder.Services.AddScoped<ITokenRepository, TokenRepository>();
-builder.Services.AddScoped<IImageRepository, LocalImageRepository>();
-builder.Services.AddScoped<IDifficultyRepository, SQLDifficultyRepository>();
-builder.Services.AddScoped<ICategoryRepository, SQLCategoryRepository>();
+// builder 
 
-// AutoMapper
-builder.Services.AddAutoMapper(typeof(AutoMapperProfiles));
+builder = LoggerServices.AppBuilder(builder);
 
-// Identity
-builder.Services.AddIdentityCore<IdentityUser>()
-    .AddRoles<IdentityRole>()
-    .AddTokenProvider<DataProtectorTokenProvider<IdentityUser>>("NZWalks")
-    .AddEntityFrameworkStores<NZWalksAuthDbContext>()
-    .AddDefaultTokenProviders();
+builder = RestfulAppServices.AppBuilder(builder);
 
-
-builder.Services.Configure<IdentityOptions>(options =>
-{
-    options.Password.RequireDigit = false;
-    options.Password.RequireLowercase = false;
-    options.Password.RequireNonAlphanumeric = false;
-    options.Password.RequireUppercase = false;
-    options.Password.RequiredLength = 6;
-    options.Password.RequiredUniqueChars = 1;
-});
-
-// Authentication
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-    .AddJwtBearer(options =>
-    options.TokenValidationParameters = new TokenValidationParameters
-    {
-        ValidateIssuer = true,
-        ValidateAudience = true,
-        ValidateLifetime = true,
-        ValidateIssuerSigningKey = true,
-        ValidIssuer = builder.Configuration["Jwt:Issuer"],
-        ValidAudience = builder.Configuration["Jwt:Audience"],
-        IssuerSigningKey = new SymmetricSecurityKey(
-            Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
-    });
+builder = GraphQLAppServices.AppBuilder(builder);
 
 // App 
 var app = builder.Build();
@@ -134,6 +42,11 @@ app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
 
+//app.UseEndpoints(endpoints =>
+//{
+//    endpoints.MapGraphQL();
+//});
+
 app.UseStaticFiles(new StaticFileOptions
 {
     FileProvider = new PhysicalFileProvider(System.IO.Path.Combine(Directory.GetCurrentDirectory(), "Images")),
@@ -141,10 +54,5 @@ app.UseStaticFiles(new StaticFileOptions
 });
 
 app.MapControllers();
-
-//app.UseEndpoints(endpoints =>
-//{
-//    endpoints.MapGraphQL();
-//});
 
 app.Run();
