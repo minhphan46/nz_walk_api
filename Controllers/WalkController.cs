@@ -4,7 +4,7 @@ using System.Net;
 using UdemyProject1.CustomActionFilters;
 using UdemyProject1.Helpers;
 using UdemyProject1.Models.Domain;
-using UdemyProject1.Models.DTO.Walk;
+using UdemyProject1.Models.DTO.WalkModel;
 using UdemyProject1.Repositories.Interfaces;
 
 namespace UdemyProject1.Controllers

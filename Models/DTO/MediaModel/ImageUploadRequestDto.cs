@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace UdemyProject1.Models.DTO.Media
+namespace UdemyProject1.Models.DTO.MediaModel
 {
     public class ImageUploadRequestDto
     {

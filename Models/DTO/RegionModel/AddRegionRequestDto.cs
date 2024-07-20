@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace UdemyProject1.Models.DTO.Region
+namespace UdemyProject1.Models.DTO.RegionModel
 {
-    public class UpdateRegionRequestDto
+    public class AddRegionRequestDto
     {
         [Required]
         [MinLength(3, ErrorMessage = "Code has to be a minimum of 3 characters")]

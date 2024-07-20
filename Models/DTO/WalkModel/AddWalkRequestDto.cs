@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace UdemyProject1.Models.DTO.Walk
+namespace UdemyProject1.Models.DTO.WalkModel
 {
-    public class UpdateWalkRequestDto
+    public class AddWalkRequestDto
     {
         [Required]
         [MaxLength(100)]

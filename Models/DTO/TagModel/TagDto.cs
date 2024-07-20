@@ -1,4 +1,4 @@
-﻿namespace UdemyProject1.Models.DTO.Tag
+﻿namespace UdemyProject1.Models.DTO.TagModel
 {
     public class TagDto
     {

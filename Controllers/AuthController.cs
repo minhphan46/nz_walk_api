@@ -1,8 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using UdemyProject1.Helpers;
-using UdemyProject1.Models.DTO.Authentication;
+using UdemyProject1.Models.DTO.AuthenticationModel;
 using UdemyProject1.Repositories.Interfaces;
 
 namespace UdemyProject1.Controllers

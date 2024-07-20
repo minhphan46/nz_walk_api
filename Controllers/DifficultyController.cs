@@ -1,11 +1,10 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 using UdemyProject1.CustomActionFilters;
 using UdemyProject1.Helpers;
 using UdemyProject1.Models.Domain;
-using UdemyProject1.Models.DTO.Difficulty;
+using UdemyProject1.Models.DTO.DifficultyModel;
 using UdemyProject1.Repositories.Interfaces;
 
 namespace UdemyProject1.Controllers

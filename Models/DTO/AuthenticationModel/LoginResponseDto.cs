@@ -1,4 +1,4 @@
-﻿namespace UdemyProject1.Models.DTO.Authentication
+﻿namespace UdemyProject1.Models.DTO.AuthenticationModel
 {
     public class LoginResponseDto
     {

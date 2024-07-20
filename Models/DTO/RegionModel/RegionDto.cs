@@ -1,4 +1,4 @@
-﻿namespace UdemyProject1.Models.DTO.Region
+﻿namespace UdemyProject1.Models.DTO.RegionModel
 {
     public class RegionDto
     {

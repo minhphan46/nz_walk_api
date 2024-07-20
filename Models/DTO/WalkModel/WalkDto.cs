@@ -1,8 +1,9 @@
 ﻿using UdemyProject1.Models.Domain;
-using UdemyProject1.Models.DTO.Difficulty;
-using UdemyProject1.Models.DTO.Region;
+using UdemyProject1.Models.DTO.DifficultyModel;
+using UdemyProject1.Models.DTO.RegionModel;
+using UdemyProject1.Models.DTO.WalkTagModel;
 
-namespace UdemyProject1.Models.DTO.Walk
+namespace UdemyProject1.Models.DTO.WalkModel
 {
     public class WalkDto
     {
@@ -15,6 +16,6 @@ namespace UdemyProject1.Models.DTO.Walk
         public RegionDto Region { get; set; }
         public DifficultyDto Difficulty { get; set; }
 
-        public ICollection<WalkTag> WalkTags { get; set; }
+        public ICollection<WalkTagDto> Tags { get; set; }
     }
 }

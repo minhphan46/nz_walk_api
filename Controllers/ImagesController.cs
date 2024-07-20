@@ -1,8 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using UdemyProject1.Helpers;
 using UdemyProject1.Models.Domain;
-using UdemyProject1.Models.DTO.Media;
+using UdemyProject1.Models.DTO.MediaModel;
 using UdemyProject1.Repositories.Interfaces;
 
 namespace UdemyProject1.Controllers
