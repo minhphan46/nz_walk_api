@@ -7,11 +7,11 @@ using Microsoft.OpenApi.Models;
 using Serilog;
 using System.Text;
 using System.Text.Json.Serialization;
-using UdemyProject1.Data;
-using UdemyProject1.Mappings;
+using UdemyProject1.DbContexts;
 using UdemyProject1.Middlewares;
-using UdemyProject1.Repositories.Implements;
-using UdemyProject1.Repositories.Interfaces;
+using UdemyProject1.RESTful.Helpers;
+using UdemyProject1.RESTful.Repositories.Implements;
+using UdemyProject1.RESTful.Repositories.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -118,6 +118,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
     });
 
+// App 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -139,7 +140,11 @@ app.UseStaticFiles(new StaticFileOptions
     RequestPath = "/Images"
 });
 
-
 app.MapControllers();
+
+//app.UseEndpoints(endpoints =>
+//{
+//    endpoints.MapGraphQL();
+//});
 
 app.Run();

@@ -1,6 +1,5 @@
-﻿using System.Diagnostics;
-using System.Net;
-using UdemyProject1.Helpers;
+﻿using System.Net;
+using UdemyProject1.RESTful.Helpers;
 
 namespace UdemyProject1.Middlewares
 {
