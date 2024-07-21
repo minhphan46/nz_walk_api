@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
@@ -17,8 +18,8 @@ namespace UdemyProject1.RESTful.RestfulAppServices
         {
             // Configuration
             builder.Services.AddControllers();
-            builder.Services.AddControllers().AddJsonOptions(x =>
-                            x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
+            //builder.Services.AddControllers().AddJsonOptions(x =>
+            //                x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             // Swagger
@@ -53,6 +54,11 @@ namespace UdemyProject1.RESTful.RestfulAppServices
                 });
             });
 
+            // DBContext
+            builder.Services.AddScoped<NZWalksDbContext>(p =>
+                p.GetRequiredService<IDbContextFactory<NZWalksDbContext>>().CreateDbContext()
+            );
+
             // Repositories
             builder.Services.AddScoped<IRegionRepository, SQLRegionRepository>();
             builder.Services.AddScoped<IWalkRepository, SQLWalkRepository>();
@@ -60,9 +66,6 @@ namespace UdemyProject1.RESTful.RestfulAppServices
             builder.Services.AddScoped<IImageRepository, LocalImageRepository>();
             builder.Services.AddScoped<IDifficultyRepository, SQLDifficultyRepository>();
             builder.Services.AddScoped<ICategoryRepository, SQLCategoryRepository>();
-
-            // AutoMapper
-            builder.Services.AddAutoMapper(typeof(AutoMapperProfiles));
 
             // Identity
             builder.Services.AddIdentityCore<IdentityUser>()

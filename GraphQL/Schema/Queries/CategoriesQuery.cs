@@ -1,4 +1,7 @@
-﻿using UdemyProject1.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using UdemyProject1.Data.DbContexts;
+using UdemyProject1.Entities;
+using UdemyProject1.GraphQL.Resolvers;
 using UdemyProject1.RESTful.Repositories.Interfaces;
 
 namespace UdemyProject1.GraphQL.Schema.Queries
@@ -6,28 +9,37 @@ namespace UdemyProject1.GraphQL.Schema.Queries
     [ExtendObjectType("Query")]
     public class CategoriesQuery
     {
-        private readonly ICategoryRepository categoryRepository;
+        private readonly IDbContextFactory<NZWalksDbContext> _dbContextFactory;
+        private readonly CategoriesResolver _resolver;
 
-        public CategoriesQuery(ICategoryRepository categoryRepository)
+        public CategoriesQuery(IDbContextFactory<NZWalksDbContext> dbContextFactory, CategoriesResolver resolver)
         {
-            this.categoryRepository = categoryRepository;
+            _dbContextFactory = dbContextFactory;
+            _resolver = resolver;
         }
 
         public async Task<IEnumerable<Category>> GetAllCategory()
         {
-            var categories = await categoryRepository.GetAllAsync();
-            return categories;
+            using (NZWalksDbContext context = _dbContextFactory.CreateDbContext())
+            {
+                var categories = await _resolver.GetAllAsync(context);
+                return categories;
+            }
         }
 
         public async Task<Category> GetCategoryById(Guid categoryId)
         {
-            var category = await categoryRepository.GetByIdAsync(categoryId);
-
-            if (category == null)
+            using (NZWalksDbContext context = _dbContextFactory.CreateDbContext())
             {
-                return null;
+                var category = await _resolver.GetByIdAsync(context, categoryId);
+
+                if (category == null)
+                {
+                    return null;
+                }
+                return category;
             }
-            return category;
+
         }
     }
 }
