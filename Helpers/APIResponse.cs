@@ -1,6 +1,6 @@
 ﻿using System.Net;
 
-namespace UdemyProject1.RESTful.Helpers
+namespace UdemyProject1.Helpers
 {
     // success respone
     public class APISucessResponse

@@ -1,4 +1,5 @@
-﻿using UdemyProject1.GraphQL.Schema.Queries;
+﻿using UdemyProject1.GraphQL.Schema.Mutations;
+using UdemyProject1.GraphQL.Schema.Queries;
 
 namespace UdemyProject1.GraphQL.GraphQLAppServices
 {
@@ -9,8 +10,10 @@ namespace UdemyProject1.GraphQL.GraphQLAppServices
             builder.Services
                 .AddGraphQLServer()
                 .AddQueryType(q => q.Name("Query"))
-                .AddType<Query>()
-                .AddType<CategoriesQuery>();
+                .AddType<CategoriesQuery>()
+                .AddMutationType(q => q.Name("Mutation"))
+                .AddMutationConventions()
+                .AddType<CategoriesMutation>();
 
             return builder;
         }

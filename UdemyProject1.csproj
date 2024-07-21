@@ -30,7 +30,6 @@
 	<ItemGroup>
 		<Folder Include="Images\" />
 		<Folder Include="GraphQL\Schema\Filters\" />
-		<Folder Include="GraphQL\Schema\Mutations\" />
 		<Folder Include="GraphQL\Schema\Subscriptions\" />
 		<Folder Include="GraphQL\Schema\Sorters\" />
 	</ItemGroup>

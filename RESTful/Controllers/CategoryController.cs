@@ -2,11 +2,11 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 using UdemyProject1.Entities;
-using UdemyProject1.RESTful.Helpers;
+using UdemyProject1.Helpers;
 using UdemyProject1.RESTful.Models.DTO.CategoryModel;
 using UdemyProject1.RESTful.Repositories.Interfaces;
 
-namespace UdemyProject1.RESTful.Controllers
+namespace UdemyProject1.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

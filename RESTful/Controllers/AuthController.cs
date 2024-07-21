@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using UdemyProject1.RESTful.Helpers;
+using UdemyProject1.Helpers;
 using UdemyProject1.RESTful.Models.DTO.AuthenticationModel;
 using UdemyProject1.RESTful.Repositories.Interfaces;
 

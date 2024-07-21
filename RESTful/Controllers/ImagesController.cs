@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using UdemyProject1.Entities;
-using UdemyProject1.RESTful.Helpers;
+using UdemyProject1.Helpers;
 using UdemyProject1.RESTful.Models.DTO.MediaModel;
 using UdemyProject1.RESTful.Repositories.Interfaces;
 using Path = System.IO.Path;
