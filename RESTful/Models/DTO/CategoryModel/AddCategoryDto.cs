@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace UdemyProject1.RESTful.Models.DTO.CategoryModel
+namespace NZWalks.RESTful.Models.DTO.CategoryModel
 {
     public class AddCategoryDto
     {

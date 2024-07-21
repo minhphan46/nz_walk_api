@@ -1,4 +1,4 @@
-﻿namespace UdemyProject1.RESTful.Models.DTO.DifficultyModel
+﻿namespace NZWalks.RESTful.Models.DTO.DifficultyModel
 {
     public class DifficultyDto
     {

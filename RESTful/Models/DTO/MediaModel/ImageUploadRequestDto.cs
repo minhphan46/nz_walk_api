@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace UdemyProject1.RESTful.Models.DTO.MediaModel
+namespace NZWalks.RESTful.Models.DTO.MediaModel
 {
     public class ImageUploadRequestDto
     {

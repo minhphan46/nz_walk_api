@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace UdemyProject1.Entities
+namespace NZWalks.Entities
 {
     public class Image
     {

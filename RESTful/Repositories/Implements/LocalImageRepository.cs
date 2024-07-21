@@ -1,8 +1,8 @@
-﻿using UdemyProject1.Data.DbContexts;
-using UdemyProject1.Entities;
-using UdemyProject1.RESTful.Repositories.Interfaces;
+﻿using NZWalks.Data.DbContexts;
+using NZWalks.Entities;
+using NZWalks.RESTful.Repositories.Interfaces;
 
-namespace UdemyProject1.RESTful.Repositories.Implements
+namespace NZWalks.RESTful.Repositories.Implements
 {
     public class LocalImageRepository : IImageRepository
     {

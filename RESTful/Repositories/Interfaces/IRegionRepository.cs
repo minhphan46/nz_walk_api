@@ -1,6 +1,6 @@
-﻿using UdemyProject1.Entities;
+﻿using NZWalks.Entities;
 
-namespace UdemyProject1.RESTful.Repositories.Interfaces
+namespace NZWalks.RESTful.Repositories.Interfaces
 {
     public interface IRegionRepository
     {

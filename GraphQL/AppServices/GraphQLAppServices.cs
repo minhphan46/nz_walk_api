@@ -1,8 +1,8 @@
-﻿using UdemyProject1.GraphQL.Resolvers;
-using UdemyProject1.GraphQL.Schema.Mutations;
-using UdemyProject1.GraphQL.Schema.Queries;
+﻿using NZWalks.GraphQL.Resolvers;
+using NZWalks.GraphQL.Schema.Mutations;
+using NZWalks.GraphQL.Schema.Queries;
 
-namespace UdemyProject1.GraphQL.GraphQLAppServices
+namespace NZWalks.GraphQL.GraphQLAppServices
 {
     public class GraphQLAppServices
     {

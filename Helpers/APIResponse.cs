@@ -1,6 +1,6 @@
 ﻿using System.Net;
 
-namespace UdemyProject1.Helpers
+namespace NZWalks.Helpers
 {
     // success respone
     public class APISucessResponse

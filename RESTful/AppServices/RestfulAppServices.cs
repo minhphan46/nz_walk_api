@@ -5,12 +5,12 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
 using System.Text.Json.Serialization;
-using UdemyProject1.Data.DbContexts;
-using UdemyProject1.Helpers;
-using UdemyProject1.RESTful.Repositories.Implements;
-using UdemyProject1.RESTful.Repositories.Interfaces;
+using NZWalks.Data.DbContexts;
+using NZWalks.Helpers;
+using NZWalks.RESTful.Repositories.Implements;
+using NZWalks.RESTful.Repositories.Interfaces;
 
-namespace UdemyProject1.RESTful.RestfulAppServices
+namespace NZWalks.RESTful.RestfulAppServices
 {
     public class RestfulAppServices
     {

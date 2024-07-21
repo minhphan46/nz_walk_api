@@ -1,6 +1,6 @@
 ﻿using Serilog;
 
-namespace UdemyProject1.Loggers
+namespace NZWalks.Loggers
 {
     public class LoggerServices
     {

@@ -1,4 +1,4 @@
-﻿namespace UdemyProject1.Entities
+﻿namespace NZWalks.Entities
 {
     public class WalkCategory
     {

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace UdemyProject1.RESTful.Models.DTO.WalkModel
+namespace NZWalks.RESTful.Models.DTO.WalkModel
 {
     public class UpdateWalkRequestDto
     {

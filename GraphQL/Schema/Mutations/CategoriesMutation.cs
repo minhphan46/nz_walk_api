@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
-using UdemyProject1.Data.DbContexts;
-using UdemyProject1.Entities;
-using UdemyProject1.GraphQL.Resolvers;
-using UdemyProject1.RESTful.Repositories.Interfaces;
+using NZWalks.Data.DbContexts;
+using NZWalks.Entities;
+using NZWalks.GraphQL.Resolvers;
+using NZWalks.RESTful.Repositories.Interfaces;
 
-namespace UdemyProject1.GraphQL.Schema.Mutations
+namespace NZWalks.GraphQL.Schema.Mutations
 {
     [ExtendObjectType("Mutation")]
     public class CategoriesMutation

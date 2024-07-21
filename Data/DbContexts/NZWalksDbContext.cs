@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using UdemyProject1.Entities;
+using NZWalks.Entities;
 
-namespace UdemyProject1.Data.DbContexts
+namespace NZWalks.Data.DbContexts
 {
     public class NZWalksDbContext : DbContext
     {

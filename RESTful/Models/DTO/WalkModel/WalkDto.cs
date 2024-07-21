@@ -1,8 +1,8 @@
-﻿using UdemyProject1.RESTful.Models.DTO.DifficultyModel;
-using UdemyProject1.RESTful.Models.DTO.RegionModel;
-using UdemyProject1.RESTful.Models.DTO.WalkCategoryModel;
+﻿using NZWalks.RESTful.Models.DTO.DifficultyModel;
+using NZWalks.RESTful.Models.DTO.RegionModel;
+using NZWalks.RESTful.Models.DTO.WalkCategoryModel;
 
-namespace UdemyProject1.RESTful.Models.DTO.WalkModel
+namespace NZWalks.RESTful.Models.DTO.WalkModel
 {
     public class WalkDto
     {

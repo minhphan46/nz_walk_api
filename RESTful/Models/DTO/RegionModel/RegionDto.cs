@@ -1,4 +1,4 @@
-﻿namespace UdemyProject1.RESTful.Models.DTO.RegionModel
+﻿namespace NZWalks.RESTful.Models.DTO.RegionModel
 {
     public class RegionDto
     {

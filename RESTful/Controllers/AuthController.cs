@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using UdemyProject1.Helpers;
-using UdemyProject1.RESTful.Models.DTO.AuthenticationModel;
-using UdemyProject1.RESTful.Repositories.Interfaces;
+using NZWalks.Helpers;
+using NZWalks.RESTful.Models.DTO.AuthenticationModel;
+using NZWalks.RESTful.Repositories.Interfaces;
 
-namespace UdemyProject1.RESTful.Controllers
+namespace NZWalks.RESTful.Controllers
 {
     [Route("api/auth")]
     [ApiController]

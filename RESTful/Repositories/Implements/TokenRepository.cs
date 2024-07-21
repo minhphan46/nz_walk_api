@@ -3,9 +3,9 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using UdemyProject1.RESTful.Repositories.Interfaces;
+using NZWalks.RESTful.Repositories.Interfaces;
 
-namespace UdemyProject1.RESTful.Repositories.Implements
+namespace NZWalks.RESTful.Repositories.Implements
 {
     public class TokenRepository : ITokenRepository
     {

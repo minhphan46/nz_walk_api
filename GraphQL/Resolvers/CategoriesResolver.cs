@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using UdemyProject1.Data.DbContexts;
-using UdemyProject1.Entities;
+using NZWalks.Data.DbContexts;
+using NZWalks.Entities;
 
-namespace UdemyProject1.GraphQL.Resolvers
+namespace NZWalks.GraphQL.Resolvers
 {
     public class CategoriesResolver
     {

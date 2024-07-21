@@ -1,7 +1,7 @@
 ﻿using System.Net;
-using UdemyProject1.Helpers;
+using NZWalks.Helpers;
 
-namespace UdemyProject1.Middlewares
+namespace NZWalks.Middlewares
 {
     public class ExceptionHandlerMiddleware
     {

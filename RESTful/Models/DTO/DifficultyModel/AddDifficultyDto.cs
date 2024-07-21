@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace UdemyProject1.RESTful.Models.DTO.DifficultyModel
+namespace NZWalks.RESTful.Models.DTO.DifficultyModel
 {
     public class AddDifficultyDto
     {

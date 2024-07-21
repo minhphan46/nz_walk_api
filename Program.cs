@@ -1,11 +1,11 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
-using UdemyProject1.Data.DbContexts;
-using UdemyProject1.GraphQL.GraphQLAppServices;
-using UdemyProject1.Helpers;
-using UdemyProject1.Loggers;
-using UdemyProject1.Middlewares;
-using UdemyProject1.RESTful.RestfulAppServices;
+using NZWalks.Data.DbContexts;
+using NZWalks.GraphQL.GraphQLAppServices;
+using NZWalks.Helpers;
+using NZWalks.Loggers;
+using NZWalks.Middlewares;
+using NZWalks.RESTful.RestfulAppServices;
 
 var builder = WebApplication.CreateBuilder(args);
 

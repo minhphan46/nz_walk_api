@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 
-namespace UdemyProject1.RESTful.Repositories.Interfaces
+namespace NZWalks.RESTful.Repositories.Interfaces
 {
     public interface ITokenRepository
     {

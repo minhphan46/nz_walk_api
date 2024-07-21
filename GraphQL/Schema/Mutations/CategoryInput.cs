@@ -1,4 +1,4 @@
-﻿namespace UdemyProject1.GraphQL.Schema.Mutations
+﻿namespace NZWalks.GraphQL.Schema.Mutations
 {
     public class CategoryInput
     {

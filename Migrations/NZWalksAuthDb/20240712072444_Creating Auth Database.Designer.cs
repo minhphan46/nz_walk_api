@@ -5,12 +5,12 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using UdemyProject1.Data.DbContexts;
+using NZWalks.Data.DbContexts;
 
 
 #nullable disable
 
-namespace UdemyProject1.Migrations.NZWalksAuthDb
+namespace NZWalks.Migrations.NZWalksAuthDb
 {
     [DbContext(typeof(NZWalksAuthDbContext))]
     [Migration("20240712072444_Creating Auth Database")]

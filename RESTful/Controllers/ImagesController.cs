@@ -1,11 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using UdemyProject1.Entities;
-using UdemyProject1.Helpers;
-using UdemyProject1.RESTful.Models.DTO.MediaModel;
-using UdemyProject1.RESTful.Repositories.Interfaces;
+using NZWalks.Entities;
+using NZWalks.Helpers;
+using NZWalks.RESTful.Models.DTO.MediaModel;
+using NZWalks.RESTful.Repositories.Interfaces;
 using Path = System.IO.Path;
 
-namespace UdemyProject1.RESTful.Controllers
+namespace NZWalks.RESTful.Controllers
 {
     [Route("api/media")]
     [ApiController]

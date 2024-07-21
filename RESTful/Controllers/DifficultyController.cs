@@ -1,12 +1,12 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
-using UdemyProject1.Entities;
-using UdemyProject1.Helpers;
-using UdemyProject1.RESTful.Models.DTO.DifficultyModel;
-using UdemyProject1.RESTful.Repositories.Interfaces;
+using NZWalks.Entities;
+using NZWalks.Helpers;
+using NZWalks.RESTful.Models.DTO.DifficultyModel;
+using NZWalks.RESTful.Repositories.Interfaces;
 
-namespace UdemyProject1.RESTful.Controllers
+namespace NZWalks.RESTful.Controllers
 {
     [Route("api/difficulties")]
     [ApiController]

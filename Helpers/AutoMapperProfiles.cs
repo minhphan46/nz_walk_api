@@ -1,13 +1,13 @@
 ﻿using AutoMapper;
-using UdemyProject1.Entities;
-using UdemyProject1.GraphQL.Schema.Mutations;
-using UdemyProject1.RESTful.Models.DTO.CategoryModel;
-using UdemyProject1.RESTful.Models.DTO.DifficultyModel;
-using UdemyProject1.RESTful.Models.DTO.RegionModel;
-using UdemyProject1.RESTful.Models.DTO.WalkCategoryModel;
-using UdemyProject1.RESTful.Models.DTO.WalkModel;
+using NZWalks.Entities;
+using NZWalks.GraphQL.Schema.Mutations;
+using NZWalks.RESTful.Models.DTO.CategoryModel;
+using NZWalks.RESTful.Models.DTO.DifficultyModel;
+using NZWalks.RESTful.Models.DTO.RegionModel;
+using NZWalks.RESTful.Models.DTO.WalkCategoryModel;
+using NZWalks.RESTful.Models.DTO.WalkModel;
 
-namespace UdemyProject1.Helpers
+namespace NZWalks.Helpers
 {
     public class AutoMapperProfiles : Profile
     {

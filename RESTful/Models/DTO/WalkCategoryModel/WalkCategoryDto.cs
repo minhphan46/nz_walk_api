@@ -1,6 +1,6 @@
-﻿using UdemyProject1.RESTful.Models.DTO.CategoryModel;
+﻿using NZWalks.RESTful.Models.DTO.CategoryModel;
 
-namespace UdemyProject1.RESTful.Models.DTO.WalkCategoryModel
+namespace NZWalks.RESTful.Models.DTO.WalkCategoryModel
 {
     public class WalkCategoryDto
     {

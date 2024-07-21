@@ -1,4 +1,4 @@
-﻿namespace UdemyProject1.RESTful.Models.DTO.AuthenticationModel
+﻿namespace NZWalks.RESTful.Models.DTO.AuthenticationModel
 {
     public class LoginResponseDto
     {

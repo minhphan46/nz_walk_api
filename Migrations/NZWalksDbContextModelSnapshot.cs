@@ -4,12 +4,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using UdemyProject1.Data.DbContexts;
+using NZWalks.Data.DbContexts;
 
 
 #nullable disable
 
-namespace UdemyProject1.Migrations
+namespace NZWalks.Migrations
 {
     [DbContext(typeof(NZWalksDbContext))]
     partial class NZWalksDbContextModelSnapshot : ModelSnapshot
@@ -23,7 +23,7 @@ namespace UdemyProject1.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("UdemyProject1.Models.Domain.Category", b =>
+            modelBuilder.Entity("NZWalks.Models.Domain.Category", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -37,7 +37,7 @@ namespace UdemyProject1.Migrations
                     b.ToTable("Categories");
                 });
 
-            modelBuilder.Entity("UdemyProject1.Models.Domain.Difficulty", b =>
+            modelBuilder.Entity("NZWalks.Models.Domain.Difficulty", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -68,7 +68,7 @@ namespace UdemyProject1.Migrations
                         });
                 });
 
-            modelBuilder.Entity("UdemyProject1.Models.Domain.Image", b =>
+            modelBuilder.Entity("NZWalks.Models.Domain.Image", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -94,7 +94,7 @@ namespace UdemyProject1.Migrations
                     b.ToTable("Images");
                 });
 
-            modelBuilder.Entity("UdemyProject1.Models.Domain.Region", b =>
+            modelBuilder.Entity("NZWalks.Models.Domain.Region", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -155,7 +155,7 @@ namespace UdemyProject1.Migrations
                         });
                 });
 
-            modelBuilder.Entity("UdemyProject1.Models.Domain.Walk", b =>
+            modelBuilder.Entity("NZWalks.Models.Domain.Walk", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -188,7 +188,7 @@ namespace UdemyProject1.Migrations
                     b.ToTable("Walks");
                 });
 
-            modelBuilder.Entity("UdemyProject1.Models.Domain.WalkCategory", b =>
+            modelBuilder.Entity("NZWalks.Models.Domain.WalkCategory", b =>
                 {
                     b.Property<Guid>("WalkId")
                         .HasColumnType("uniqueidentifier");
@@ -203,15 +203,15 @@ namespace UdemyProject1.Migrations
                     b.ToTable("WalkCategories");
                 });
 
-            modelBuilder.Entity("UdemyProject1.Models.Domain.Walk", b =>
+            modelBuilder.Entity("NZWalks.Models.Domain.Walk", b =>
                 {
-                    b.HasOne("UdemyProject1.Models.Domain.Difficulty", "Difficulty")
+                    b.HasOne("NZWalks.Models.Domain.Difficulty", "Difficulty")
                         .WithMany()
                         .HasForeignKey("DifficultyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("UdemyProject1.Models.Domain.Region", "Region")
+                    b.HasOne("NZWalks.Models.Domain.Region", "Region")
                         .WithMany()
                         .HasForeignKey("RegionId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -222,15 +222,15 @@ namespace UdemyProject1.Migrations
                     b.Navigation("Region");
                 });
 
-            modelBuilder.Entity("UdemyProject1.Models.Domain.WalkCategory", b =>
+            modelBuilder.Entity("NZWalks.Models.Domain.WalkCategory", b =>
                 {
-                    b.HasOne("UdemyProject1.Models.Domain.Category", "Category")
+                    b.HasOne("NZWalks.Models.Domain.Category", "Category")
                         .WithMany("WalkCategories")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("UdemyProject1.Models.Domain.Walk", "Walk")
+                    b.HasOne("NZWalks.Models.Domain.Walk", "Walk")
                         .WithMany("WalkCategories")
                         .HasForeignKey("WalkId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -241,12 +241,12 @@ namespace UdemyProject1.Migrations
                     b.Navigation("Walk");
                 });
 
-            modelBuilder.Entity("UdemyProject1.Models.Domain.Category", b =>
+            modelBuilder.Entity("NZWalks.Models.Domain.Category", b =>
                 {
                     b.Navigation("WalkCategories");
                 });
 
-            modelBuilder.Entity("UdemyProject1.Models.Domain.Walk", b =>
+            modelBuilder.Entity("NZWalks.Models.Domain.Walk", b =>
                 {
                     b.Navigation("WalkCategories");
                 });

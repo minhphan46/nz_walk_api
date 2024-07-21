@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 
-namespace UdemyProject1.Helpers
+namespace NZWalks.Helpers
 {
     public class ValidateModelAttribute : ActionFilterAttribute
     {
