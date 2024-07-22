@@ -1,6 +1,6 @@
 ﻿using HotChocolate.Execution;
 using HotChocolate.Subscriptions;
-using NZWalks.GraphQL.Schema.Mutations;
+using NZWalks.GraphQL.DTOs.Categories;
 
 namespace NZWalks.GraphQL.Schema.Subscriptions
 {

@@ -1,6 +1,9 @@
 ﻿using AutoMapper;
 using NZWalks.Entities;
-using NZWalks.GraphQL.Schema.Mutations;
+using NZWalks.GraphQL.DTOs.Categories;
+using NZWalks.GraphQL.DTOs.Difficulties;
+using NZWalks.GraphQL.DTOs.Regions;
+using NZWalks.GraphQL.DTOs.Walks;
 using NZWalks.RESTful.Models.DTO.CategoryModel;
 using NZWalks.RESTful.Models.DTO.DifficultyModel;
 using NZWalks.RESTful.Models.DTO.RegionModel;
@@ -32,6 +35,14 @@ namespace NZWalks.Helpers
             // GraphQl
             CreateMap<Category, CategoryInput>().ReverseMap();
             CreateMap<Category, CategoryOutput>().ReverseMap();
+            CreateMap<Difficulty, DifficultyInput>().ReverseMap();
+            CreateMap<Difficulty, DifficultyOutput>().ReverseMap();
+            CreateMap<Region, RegionInput>().ReverseMap();
+            CreateMap<Region, RegionOutput>().ReverseMap();
+            CreateMap<Walk, WalkInput>().ReverseMap();
+            CreateMap<Walk, WalkOutput>()
+                .ForMember(x => x.Categories, opt => opt.MapFrom(x => x.WalkCategories))
+                .ReverseMap();
         }
     }
 }

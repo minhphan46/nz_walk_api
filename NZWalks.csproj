@@ -28,6 +28,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<Folder Include="GraphQL\DataLoaders\" />
+		<Folder Include="GraphQL\DTOs\WalkCategories\" />
 		<Folder Include="Images\" />
 		<Folder Include="GraphQL\Schema\Filters\" />
 		<Folder Include="GraphQL\Schema\Sorters\" />

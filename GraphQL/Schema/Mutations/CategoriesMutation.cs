@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using HotChocolate.Subscriptions;
 using NZWalks.Entities;
+using NZWalks.GraphQL.DTOs.Categories;
 using NZWalks.GraphQL.Resolvers;
 using NZWalks.GraphQL.Schema.Subscriptions;
 

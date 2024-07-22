@@ -1,4 +1,4 @@
-﻿namespace NZWalks.GraphQL.Schema.Mutations
+﻿namespace NZWalks.GraphQL.DTOs.Categories
 {
     public class CategoryInput
     {

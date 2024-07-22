@@ -11,12 +11,18 @@ namespace NZWalks.GraphQL.GraphQLAppServices
         {
             // Resolver
             builder.Services.AddScoped<CategoriesResolver>();
+            builder.Services.AddScoped<DifficultiesResolver>();
+            builder.Services.AddScoped<RegionsResolver>();
+            builder.Services.AddScoped<WalksResolver>();
 
             // QueryType
             builder.Services
                 .AddGraphQLServer()
                 .AddQueryType(q => q.Name("Query"))
                 .AddType<CategoriesQuery>()
+                .AddType<DifficultyQuery>()
+                .AddType<RegionQuery>()
+                .AddType<WalkQuery>()
                 .AddMutationType(q => q.Name("Mutation"))
                 .AddMutationConventions()
                 .AddType<CategoriesMutation>()

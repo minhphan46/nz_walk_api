@@ -18,8 +18,8 @@ namespace NZWalks.RESTful.RestfulAppServices
         {
             // Configuration
             builder.Services.AddControllers();
-            //builder.Services.AddControllers().AddJsonOptions(x =>
-            //                x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
+            builder.Services.AddControllers().AddJsonOptions(x =>
+                            x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             // Swagger
