@@ -1,6 +1,7 @@
 ﻿using NZWalks.GraphQL.Resolvers;
 using NZWalks.GraphQL.Schema.Mutations;
 using NZWalks.GraphQL.Schema.Queries;
+using NZWalks.GraphQL.Schema.Subscriptions;
 
 namespace NZWalks.GraphQL.GraphQLAppServices
 {
@@ -18,7 +19,11 @@ namespace NZWalks.GraphQL.GraphQLAppServices
                 .AddType<CategoriesQuery>()
                 .AddMutationType(q => q.Name("Mutation"))
                 .AddMutationConventions()
-                .AddType<CategoriesMutation>();
+                .AddType<CategoriesMutation>()
+                .AddSubscriptionType(s => s.Name("Subscription"))
+                .AddType<CategoriesSubscription>()
+                .AddInMemorySubscriptions()
+                ;
 
             return builder;
         }
