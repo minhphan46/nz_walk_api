@@ -74,5 +74,13 @@ namespace NZWalks.GraphQL.Resolvers
                 return existingDifficulty;
             }
         }
+
+        public async Task<IEnumerable<Difficulty>> GetDifficultiesByWalkId(IReadOnlyList<Guid> walkIds)
+        {
+            using (NZWalksDbContext context = _dbContextFactory.CreateDbContext())
+            {
+                return await context.Difficulties.Where(d => walkIds.Contains(d.Id)).ToListAsync();
+            }
+        }
     }
 }

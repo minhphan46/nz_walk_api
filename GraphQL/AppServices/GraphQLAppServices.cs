@@ -1,4 +1,5 @@
-﻿using NZWalks.GraphQL.Resolvers;
+﻿using NZWalks.GraphQL.DataLoaders;
+using NZWalks.GraphQL.Resolvers;
 using NZWalks.GraphQL.Schema.Mutations;
 using NZWalks.GraphQL.Schema.Queries;
 using NZWalks.GraphQL.Schema.Subscriptions;
@@ -14,6 +15,11 @@ namespace NZWalks.GraphQL.GraphQLAppServices
             builder.Services.AddScoped<DifficultiesResolver>();
             builder.Services.AddScoped<RegionsResolver>();
             builder.Services.AddScoped<WalksResolver>();
+
+            // DataLoader
+            builder.Services.AddScoped<DifficultyDataLoader>();
+            builder.Services.AddScoped<RegionDataLoader>();
+            builder.Services.AddScoped<WalkDataLoader>();
 
             // QueryType
             builder.Services

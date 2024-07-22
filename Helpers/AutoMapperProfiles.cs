@@ -42,6 +42,8 @@ namespace NZWalks.Helpers
             CreateMap<Walk, WalkInput>().ReverseMap();
             CreateMap<Walk, WalkOutput>()
                 .ForMember(x => x.Categories, opt => opt.MapFrom(x => x.WalkCategories))
+                .ForSourceMember(x => x.Difficulty, opt => opt.DoNotValidate())
+                .ForSourceMember(x => x.Region, opt => opt.DoNotValidate())
                 .ReverseMap();
         }
     }

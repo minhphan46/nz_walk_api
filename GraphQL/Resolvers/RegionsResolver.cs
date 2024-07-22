@@ -75,5 +75,13 @@ namespace NZWalks.GraphQL.Resolvers
                 return existingRegion;
             }
         }
+
+        public async Task<IEnumerable<Region>> GetRegionsByWalkId(IReadOnlyList<Guid> regionIds)
+        {
+            using (NZWalksDbContext context = _dbContextFactory.CreateDbContext())
+            {
+                return await context.Regions.Where(r => regionIds.Contains(r.Id)).ToListAsync();
+            }
+        }
     }
 }
