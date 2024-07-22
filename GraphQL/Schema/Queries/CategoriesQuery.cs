@@ -35,7 +35,7 @@ namespace NZWalks.GraphQL.Schema.Queries
 
                 if (category == null)
                 {
-                    return null;
+                    throw new GraphQLException(new Error("Category not found.", "CATEGORY_NOT_FOUND"));
                 }
                 return category;
             }

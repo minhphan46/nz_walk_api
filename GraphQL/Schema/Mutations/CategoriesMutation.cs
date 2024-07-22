@@ -48,7 +48,7 @@ namespace NZWalks.GraphQL.Schema.Mutations
 
                 if (categoryDomain == null)
                 {
-                    return null;
+                    throw new GraphQLException(new Error("Category not found.", "CATEGORY_NOT_FOUND"))
                 }
 
                 var categoryOutput = mapper.Map<CategoryOutput>(categoryDomain);
@@ -101,7 +101,7 @@ namespace NZWalks.GraphQL.Schema.Mutations
 
                 if (categoryDomain == null)
                 {
-                    return null;
+                    throw new GraphQLException(new Error("Category not found.", "CATEGORY_NOT_FOUND"));
                 }
 
                 var categoryOutput = mapper.Map<CategoryOutput>(categoryDomain);
