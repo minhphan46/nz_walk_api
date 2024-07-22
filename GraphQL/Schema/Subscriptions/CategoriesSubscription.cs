@@ -1,7 +1,5 @@
-﻿using HotChocolate.Execution.Processing;
-using HotChocolate.Execution;
+﻿using HotChocolate.Execution;
 using HotChocolate.Subscriptions;
-using Microsoft.AspNetCore.Cors.Infrastructure;
 using NZWalks.GraphQL.Schema.Mutations;
 
 namespace NZWalks.GraphQL.Schema.Subscriptions

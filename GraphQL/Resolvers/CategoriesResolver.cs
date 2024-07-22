@@ -1,59 +1,80 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using NZWalks.Data.DbContexts;
 using NZWalks.Entities;
-
 namespace NZWalks.GraphQL.Resolvers
 {
     public class CategoriesResolver
     {
-        public async Task<Category> CreateAsync(NZWalksDbContext dbContext, Category category)
+        private readonly IDbContextFactory<NZWalksDbContext> _dbContextFactory;
+
+        public CategoriesResolver(IDbContextFactory<NZWalksDbContext> dbContextFactory)
         {
-            await dbContext.Categories.AddAsync(category);
-            await dbContext.SaveChangesAsync();
-            return category;
+            _dbContextFactory = dbContextFactory;
         }
 
-        public async Task<Category> DeleteAsync(NZWalksDbContext dbContext, Guid id)
+        public async Task<Category> CreateAsync(Category category)
         {
-            var existingCategory = await dbContext.Categories.FirstOrDefaultAsync(x => x.Id == id);
-
-            if (existingCategory == null)
+            using (NZWalksDbContext context = _dbContextFactory.CreateDbContext())
             {
-                return null;
+                await context.Categories.AddAsync(category);
+                await context.SaveChangesAsync();
+                return category;
             }
-
-            // remove all walk categorys associated with this category
-            var walkCategories = dbContext.WalkCategories.Where(wt => wt.WalkId == id).ToList();
-            dbContext.WalkCategories.RemoveRange(walkCategories);
-
-            dbContext.Categories.Remove(existingCategory);
-            await dbContext.SaveChangesAsync();
-            return existingCategory;
         }
 
-        public async Task<List<Category>> GetAllAsync(NZWalksDbContext dbContext)
+        public async Task<Category> DeleteAsync(Guid id)
         {
-            return await dbContext.Categories.ToListAsync();
-        }
-
-        public async Task<Category> GetByIdAsync(NZWalksDbContext dbContext, Guid id)
-        {
-            return await dbContext.Categories.FirstOrDefaultAsync(x => x.Id == id);
-        }
-
-        public async Task<Category> UpdateAsync(NZWalksDbContext dbContext, Guid id, Category category)
-        {
-            var existingCategory = await dbContext.Categories.FirstOrDefaultAsync(x => x.Id == id);
-
-            if (existingCategory == null)
+            using (NZWalksDbContext context = _dbContextFactory.CreateDbContext())
             {
-                return null;
+                var existingCategory = await context.Categories.FirstOrDefaultAsync(x => x.Id == id);
+
+                if (existingCategory == null)
+                {
+                    return null;
+                }
+
+                // remove all walk categorys associated with this category
+                var walkCategories = context.WalkCategories.Where(wt => wt.WalkId == id).ToList();
+                context.WalkCategories.RemoveRange(walkCategories);
+
+                context.Categories.Remove(existingCategory);
+                await context.SaveChangesAsync();
+                return existingCategory;
             }
+        }
 
-            existingCategory.Name = category.Name;
+        public async Task<List<Category>> GetAllAsync()
+        {
+            using (NZWalksDbContext context = _dbContextFactory.CreateDbContext())
+            {
+                return await context.Categories.ToListAsync();
+            }
+        }
 
-            await dbContext.SaveChangesAsync();
-            return existingCategory;
+        public async Task<Category> GetByIdAsync(Guid id)
+        {
+            using (NZWalksDbContext context = _dbContextFactory.CreateDbContext())
+            {
+                return await context.Categories.FirstOrDefaultAsync(x => x.Id == id);
+            }
+        }
+
+        public async Task<Category> UpdateAsync(Guid id, Category category)
+        {
+            using (NZWalksDbContext context = _dbContextFactory.CreateDbContext())
+            {
+                var existingCategory = await context.Categories.FirstOrDefaultAsync(x => x.Id == id);
+
+                if (existingCategory == null)
+                {
+                    return null;
+                }
+
+                existingCategory.Name = category.Name;
+
+                await context.SaveChangesAsync();
+                return existingCategory;
+            }
         }
     }
 }
