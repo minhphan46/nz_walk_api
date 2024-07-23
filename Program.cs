@@ -11,7 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Database
 builder.Services.AddPooledDbContextFactory<NZWalksDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("ConnectionString"))
+    options.UseSqlServer(builder.Configuration.GetConnectionString("ConnectionString")).LogTo(Console.WriteLine)
 );
 
 builder.Services.AddDbContext<NZWalksAuthDbContext>(options =>

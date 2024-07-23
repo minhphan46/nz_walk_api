@@ -16,13 +16,14 @@ namespace NZWalks.GraphQL.Schema.Queries
             this.mapper = mapper;
         }
 
-        public async Task<IEnumerable<WalkOutput>> Walks()
+        [UsePaging(IncludeTotalCount = true, DefaultPageSize = 10)]
+        public async Task<IEnumerable<WalkOutput>> GetWalks()
         {
             var walks = await _resolver.GetAllAsync();
             return mapper.Map<IEnumerable<WalkOutput>>(walks);
         }
 
-        public async Task<WalkOutput> Walk(Guid id)
+        public async Task<WalkOutput> GetWalk(Guid id)
         {
             var walk = await _resolver.GetByIdAsync(id);
 

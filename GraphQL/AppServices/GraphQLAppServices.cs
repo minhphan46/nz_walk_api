@@ -15,11 +15,13 @@ namespace NZWalks.GraphQL.GraphQLAppServices
             builder.Services.AddScoped<DifficultiesResolver>();
             builder.Services.AddScoped<RegionsResolver>();
             builder.Services.AddScoped<WalksResolver>();
+            builder.Services.AddScoped<WalkCategoriesResolver>();
 
             // DataLoader
             builder.Services.AddScoped<DifficultyDataLoader>();
             builder.Services.AddScoped<RegionDataLoader>();
             builder.Services.AddScoped<WalkDataLoader>();
+            builder.Services.AddScoped<WalkCategorieDataLoader>();
 
             // QueryType
             builder.Services

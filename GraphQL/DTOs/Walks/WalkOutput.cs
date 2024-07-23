@@ -3,6 +3,7 @@ using NZWalks.GraphQL.DataLoaders;
 using NZWalks.RESTful.Models.DTO.DifficultyModel;
 using NZWalks.RESTful.Models.DTO.RegionModel;
 using NZWalks.RESTful.Models.DTO.WalkCategoryModel;
+using System.Collections.Generic;
 
 namespace NZWalks.GraphQL.DTOs.Walks
 {
@@ -34,6 +35,11 @@ namespace NZWalks.GraphQL.DTOs.Walks
             return region;
         }
 
-        public ICollection<WalkCategoryDto> Categories { get; set; }
+        //public ICollection<WalkCategoryDto> Categories { get; set; }
+        public async Task<ICollection<WalkCategory>> Categories([Service] WalkCategorieDataLoader dataLoader)
+        {
+            ICollection<WalkCategory> walkCategories = await dataLoader.LoadAsync(Id, CancellationToken.None);
+            return walkCategories;
+        }
     }
 }

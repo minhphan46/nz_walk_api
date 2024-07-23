@@ -107,8 +107,8 @@ namespace NZWalks.GraphQL.Resolvers
             using (NZWalksDbContext context = _dbContextFactory.CreateDbContext())
             {
                 return await context.Walks
-                    .Include(w => w.WalkCategories)
-                    .ThenInclude(wt => wt.Category)
+                    //.Include(w => w.WalkCategories)
+                    //.ThenInclude(wt => wt.Category)
                     .ToListAsync();
             }
         }
