@@ -36,6 +36,7 @@ namespace NZWalks.GraphQL.GraphQLAppServices
                 .AddType<CategoriesMutation>()
                 .AddSubscriptionType(s => s.Name("Subscription"))
                 .AddType<CategoriesSubscription>()
+                .AddFiltering()
                 .AddInMemorySubscriptions()
                 ;
 
