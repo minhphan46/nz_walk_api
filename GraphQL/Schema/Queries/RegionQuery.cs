@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using NZWalks.GraphQL.DTOs.Regions;
-using NZWalks.GraphQL.DTOs.Regions;
 using NZWalks.GraphQL.Resolvers;
 
 namespace NZWalks.GraphQL.Schema.Queries
@@ -17,13 +16,13 @@ namespace NZWalks.GraphQL.Schema.Queries
             this.mapper = mapper;
         }
 
-        public async Task<IEnumerable<RegionOutput>> Regions()
+        public async Task<IEnumerable<RegionOutput>> GetRegions()
         {
             var regions = await _resolver.GetAllAsync();
             return mapper.Map<IEnumerable<RegionOutput>>(regions);
         }
 
-        public async Task<RegionOutput> Region(Guid id)
+        public async Task<RegionOutput> GetRegion(Guid id)
         {
             var region = await _resolver.GetByIdAsync(id);
 

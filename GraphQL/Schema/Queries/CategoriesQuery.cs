@@ -13,13 +13,13 @@ namespace NZWalks.GraphQL.Schema.Queries
             _resolver = resolver;
         }
 
-        public async Task<IEnumerable<Category>> Categories()
+        public async Task<IEnumerable<Category>> GetCategories()
         {
             var categories = await _resolver.GetAllAsync();
             return categories;
         }
 
-        public async Task<Category> Category(Guid id)
+        public async Task<Category> GetCategory(Guid id)
         {
             var category = await _resolver.GetByIdAsync(id);
 

@@ -17,13 +17,13 @@ namespace NZWalks.GraphQL.Schema.Queries
             this.mapper = mapper;
         }
 
-        public async Task<IEnumerable<DifficultyOutput>> Difficulties()
+        public async Task<IEnumerable<DifficultyOutput>> GetDifficulties()
         {
             var difficulties = await _resolver.GetAllAsync();
             return mapper.Map<IEnumerable<DifficultyOutput>>(difficulties);
         }
 
-        public async Task<DifficultyOutput> Difficulty(Guid id)
+        public async Task<DifficultyOutput> GetDifficulty(Guid id)
         {
             var difficulty = await _resolver.GetByIdAsync(id);
 
