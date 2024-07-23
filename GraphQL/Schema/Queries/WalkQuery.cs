@@ -3,6 +3,7 @@ using NZWalks.Data.DbContexts;
 using NZWalks.GraphQL.DTOs.Walks;
 using NZWalks.GraphQL.Resolvers;
 using NZWalks.GraphQL.Schema.Filters;
+using NZWalks.GraphQL.Schema.Sorters;
 
 namespace NZWalks.GraphQL.Schema.Queries
 {
@@ -20,6 +21,7 @@ namespace NZWalks.GraphQL.Schema.Queries
 
         [UsePaging(IncludeTotalCount = true, DefaultPageSize = 10)]
         [UseFiltering(typeof(WalkFilterType))]
+        [UseSorting(typeof(WalkSortType))]
         public async Task<IEnumerable<WalkOutput>> GetWalks()
         {
             var walks = await _resolver.GetAllAsync();
@@ -28,6 +30,7 @@ namespace NZWalks.GraphQL.Schema.Queries
 
         [UsePaging(IncludeTotalCount = true, DefaultPageSize = 10)]
         [UseFiltering(typeof(WalkFilterType))]
+        [UseSorting(typeof(WalkSortType))]
         public IQueryable<WalkOutput> GetWalksDb([Service] NZWalksDbContext context)
         {
             return context.Walks.Select(

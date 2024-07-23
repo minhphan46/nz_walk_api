@@ -30,7 +30,6 @@
 	<ItemGroup>
 		<Folder Include="GraphQL\DTOs\WalkCategories\" />
 		<Folder Include="Images\" />
-		<Folder Include="GraphQL\Schema\Sorters\" />
 	</ItemGroup>
 
 </Project>
