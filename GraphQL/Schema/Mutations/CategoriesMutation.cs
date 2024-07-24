@@ -1,10 +1,12 @@
-﻿using AutoMapper;
-using HotChocolate.Authorization;
-using HotChocolate.Subscriptions;
+﻿using AppAny.HotChocolate.FluentValidation;
 using NZWalks.Entities;
 using NZWalks.GraphQL.DTOs.Categories;
 using NZWalks.GraphQL.Resolvers;
 using NZWalks.GraphQL.Schema.Subscriptions;
+using NZWalks.GraphQL.Validators;
+using AutoMapper;
+using HotChocolate.Authorization;
+using HotChocolate.Subscriptions;
 
 namespace NZWalks.GraphQL.Schema.Mutations
 {
@@ -21,8 +23,8 @@ namespace NZWalks.GraphQL.Schema.Mutations
             this.mapper = mapper;
         }
 
-        [Authorize]
-        public async Task<CategoryOutput> CreateCategory(CategoryInput categoryInput)
+        // [Authorize]
+        public async Task<CategoryOutput> CreateCategory([UseFluentValidation, UseValidator<CategoryInputValidator>] CategoryInput categoryInput)
         {
             var categoryDomain = mapper.Map<Category>(categoryInput);
 
@@ -34,7 +36,7 @@ namespace NZWalks.GraphQL.Schema.Mutations
         }
 
         [Authorize]
-        public async Task<CategoryOutput> UpdateCategory(Guid categoryId, CategoryInput categoryInput)
+        public async Task<CategoryOutput> UpdateCategory(Guid categoryId, [UseFluentValidation] CategoryInput categoryInput)
         {
             var categoryDomain = mapper.Map<Category>(categoryInput);
             // check if the category exists
@@ -67,7 +69,7 @@ namespace NZWalks.GraphQL.Schema.Mutations
         }
 
         [Authorize]
-        public async Task<CategoryOutput> CreateCategorySubscription(CategoryInput categoryInput, [Service] ITopicEventSender eventSender)
+        public async Task<CategoryOutput> CreateCategorySubscription([UseFluentValidation] CategoryInput categoryInput, [Service] ITopicEventSender eventSender)
         {
             var categoryDomain = mapper.Map<Category>(categoryInput);
 
@@ -81,7 +83,7 @@ namespace NZWalks.GraphQL.Schema.Mutations
         }
 
         [Authorize]
-        public async Task<CategoryOutput> UpdateCategorySubscription(Guid categoryId, CategoryInput categoryInput, [Service] ITopicEventSender eventSender)
+        public async Task<CategoryOutput> UpdateCategorySubscription(Guid categoryId, [UseFluentValidation] CategoryInput categoryInput, [Service] ITopicEventSender eventSender)
         {
             var categoryDomain = mapper.Map<Category>(categoryInput);
             // check if the category exists

@@ -1,6 +1,8 @@
-﻿using FirebaseAdmin;
+﻿using AppAny.HotChocolate.FluentValidation;
+using FirebaseAdmin;
 using FirebaseAdminAuthentication.DependencyInjection.Extensions;
 using FirebaseAdminAuthentication.DependencyInjection.Models;
+using FluentValidation.AspNetCore;
 using Google.Apis.Auth.OAuth2;
 using NZWalks.GraphQL.DataLoaders;
 using NZWalks.GraphQL.DTOs.Categories;
@@ -11,6 +13,7 @@ using NZWalks.GraphQL.Resolvers;
 using NZWalks.GraphQL.Schema.Mutations;
 using NZWalks.GraphQL.Schema.Queries;
 using NZWalks.GraphQL.Schema.Subscriptions;
+using NZWalks.GraphQL.Validators;
 
 namespace NZWalks.GraphQL.GraphQLAppServices
 {
@@ -31,6 +34,10 @@ namespace NZWalks.GraphQL.GraphQLAppServices
             builder.Services.AddScoped<WalkDataLoader>();
             builder.Services.AddScoped<WalkCategorieDataLoader>();
 
+            // validation
+            builder.Services.AddFluentValidationAutoValidation();
+            builder.Services.AddTransient<CategoryInputValidator>();
+
             // QueryType
             builder.Services
                 .AddGraphQLServer()
@@ -44,6 +51,7 @@ namespace NZWalks.GraphQL.GraphQLAppServices
                 .AddType<RegionQuery>()
                 .AddType<WalkQuery>()
                 .AddType<SearchQuery>()
+                .AddType<UserQuery>()
                 .AddMutationType(q => q.Name("Mutation"))
                 .AddMutationConventions()
                 .AddType<CategoriesMutation>()
@@ -53,7 +61,10 @@ namespace NZWalks.GraphQL.GraphQLAppServices
                 .AddSorting()
                 .AddInMemorySubscriptions()
                 .AddAuthorization()
-                ;
+                .AddFluentValidation(o =>
+                {
+                    o.UseDefaultErrorMapper();
+                });
 
             // Authentication
             var firebaseConfigPath = Environment.GetEnvironmentVariable("FIREBASE_CONFIG");
