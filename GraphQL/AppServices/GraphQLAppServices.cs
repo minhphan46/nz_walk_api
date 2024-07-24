@@ -71,7 +71,7 @@ namespace NZWalks.GraphQL.GraphQLAppServices
 
             builder.Services.AddSingleton(FirebaseApp.Create(new AppOptions()
             {
-                Credential = GoogleCredential.FromJson(firebaseConfigPath)
+                Credential = GoogleCredential.FromFile(firebaseConfigPath)
             }));
             builder.Services.AddFirebaseAuthentication();
             builder.Services.AddAuthorization(
