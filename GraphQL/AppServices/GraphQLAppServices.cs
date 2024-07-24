@@ -3,6 +3,10 @@ using FirebaseAdminAuthentication.DependencyInjection.Extensions;
 using FirebaseAdminAuthentication.DependencyInjection.Models;
 using Google.Apis.Auth.OAuth2;
 using NZWalks.GraphQL.DataLoaders;
+using NZWalks.GraphQL.DTOs.Categories;
+using NZWalks.GraphQL.DTOs.Difficulties;
+using NZWalks.GraphQL.DTOs.Regions;
+using NZWalks.GraphQL.DTOs.Walks;
 using NZWalks.GraphQL.Resolvers;
 using NZWalks.GraphQL.Schema.Mutations;
 using NZWalks.GraphQL.Schema.Queries;
@@ -30,11 +34,16 @@ namespace NZWalks.GraphQL.GraphQLAppServices
             // QueryType
             builder.Services
                 .AddGraphQLServer()
+                .AddType<WalkOutput>()
+                .AddType<DifficultyOutput>()
+                .AddType<RegionOutput>()
+                .AddType<CategoryOutput>()
                 .AddQueryType(q => q.Name("Query"))
                 .AddType<CategoriesQuery>()
                 .AddType<DifficultyQuery>()
                 .AddType<RegionQuery>()
                 .AddType<WalkQuery>()
+                .AddType<SearchQuery>()
                 .AddMutationType(q => q.Name("Mutation"))
                 .AddMutationConventions()
                 .AddType<CategoriesMutation>()

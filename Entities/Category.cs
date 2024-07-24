@@ -1,6 +1,8 @@
-﻿namespace NZWalks.Entities
+﻿using NZWalks.Entities.Base;
+
+namespace NZWalks.Entities
 {
-    public class Category
+    public class Category : IBase
     {
         public Guid Id { get; set; }
         public string Name { get; set; }

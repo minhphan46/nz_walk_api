@@ -1,6 +1,8 @@
-﻿namespace NZWalks.Entities
+﻿using NZWalks.Entities.Base;
+
+namespace NZWalks.Entities
 {
-    public class Region
+    public class Region : IBase
     {
         public Guid Id { get; set; }
 

@@ -1,6 +1,10 @@
 ﻿using AutoMapper;
-using HotChocolate.Authorization;
+using Microsoft.EntityFrameworkCore;
 using NZWalks.Data.DbContexts;
+using NZWalks.GraphQL.DTOs.Base;
+using NZWalks.GraphQL.DTOs.Categories;
+using NZWalks.GraphQL.DTOs.Difficulties;
+using NZWalks.GraphQL.DTOs.Regions;
 using NZWalks.GraphQL.DTOs.Walks;
 using NZWalks.GraphQL.Resolvers;
 using NZWalks.GraphQL.Schema.Filters;

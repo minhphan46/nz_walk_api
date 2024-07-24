@@ -1,6 +1,8 @@
-﻿namespace NZWalks.GraphQL.DTOs.Regions
+﻿using NZWalks.GraphQL.DTOs.Base;
+
+namespace NZWalks.GraphQL.DTOs.Regions
 {
-    public class RegionOutput
+    public class RegionOutput : IBaseOutput
     {
         public Guid Id { get; set; }
 

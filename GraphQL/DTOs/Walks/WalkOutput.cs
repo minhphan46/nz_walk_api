@@ -1,9 +1,10 @@
 ﻿using NZWalks.Entities;
 using NZWalks.GraphQL.DataLoaders;
+using NZWalks.GraphQL.DTOs.Base;
 
 namespace NZWalks.GraphQL.DTOs.Walks
 {
-    public class WalkOutput
+    public class WalkOutput : IBaseOutput
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
