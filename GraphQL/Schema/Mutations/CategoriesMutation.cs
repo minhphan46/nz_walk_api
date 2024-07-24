@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using HotChocolate.Authorization;
 using HotChocolate.Subscriptions;
 using NZWalks.Entities;
 using NZWalks.GraphQL.DTOs.Categories;
@@ -20,6 +21,7 @@ namespace NZWalks.GraphQL.Schema.Mutations
             this.mapper = mapper;
         }
 
+        [Authorize]
         public async Task<CategoryOutput> CreateCategory(CategoryInput categoryInput)
         {
             var categoryDomain = mapper.Map<Category>(categoryInput);
@@ -31,6 +33,7 @@ namespace NZWalks.GraphQL.Schema.Mutations
             return categoryOutput;
         }
 
+        [Authorize]
         public async Task<CategoryOutput> UpdateCategory(Guid categoryId, CategoryInput categoryInput)
         {
             var categoryDomain = mapper.Map<Category>(categoryInput);
@@ -47,6 +50,7 @@ namespace NZWalks.GraphQL.Schema.Mutations
             return categoryOutput;
         }
 
+        [Authorize(Policy = "IsAdmin")]
         public async Task<CategoryOutput> DeleteCategory(Guid categoryId)
         {
             var categoryDomainModel = await _resolver.DeleteAsync(categoryId);
@@ -62,6 +66,7 @@ namespace NZWalks.GraphQL.Schema.Mutations
             return categoryOutput;
         }
 
+        [Authorize]
         public async Task<CategoryOutput> CreateCategorySubscription(CategoryInput categoryInput, [Service] ITopicEventSender eventSender)
         {
             var categoryDomain = mapper.Map<Category>(categoryInput);
@@ -75,6 +80,7 @@ namespace NZWalks.GraphQL.Schema.Mutations
             return categoryOutput;
         }
 
+        [Authorize]
         public async Task<CategoryOutput> UpdateCategorySubscription(Guid categoryId, CategoryInput categoryInput, [Service] ITopicEventSender eventSender)
         {
             var categoryDomain = mapper.Map<Category>(categoryInput);

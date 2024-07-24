@@ -1,4 +1,8 @@
-﻿using NZWalks.GraphQL.DataLoaders;
+﻿using FirebaseAdmin;
+using FirebaseAdminAuthentication.DependencyInjection.Extensions;
+using FirebaseAdminAuthentication.DependencyInjection.Models;
+using Google.Apis.Auth.OAuth2;
+using NZWalks.GraphQL.DataLoaders;
 using NZWalks.GraphQL.Resolvers;
 using NZWalks.GraphQL.Schema.Mutations;
 using NZWalks.GraphQL.Schema.Queries;
@@ -39,7 +43,20 @@ namespace NZWalks.GraphQL.GraphQLAppServices
                 .AddFiltering()
                 .AddSorting()
                 .AddInMemorySubscriptions()
+                .AddAuthorization()
                 ;
+
+            // Authentication
+            var firebaseConfigPath = Environment.GetEnvironmentVariable("FIREBASE_CONFIG");
+
+            builder.Services.AddSingleton(FirebaseApp.Create(new AppOptions()
+            {
+                Credential = GoogleCredential.FromJson(firebaseConfigPath)
+            }));
+            builder.Services.AddFirebaseAuthentication();
+            builder.Services.AddAuthorization(
+                o => o.AddPolicy("IsAdmin", p => p.RequireClaim(FirebaseUserClaimType.EMAIL, "test@test.com"))
+            );
 
             return builder;
         }

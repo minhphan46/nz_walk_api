@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using HotChocolate.Authorization;
 using NZWalks.Data.DbContexts;
 using NZWalks.GraphQL.DTOs.Walks;
 using NZWalks.GraphQL.Resolvers;

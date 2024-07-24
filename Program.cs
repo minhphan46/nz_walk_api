@@ -14,9 +14,9 @@ builder.Services.AddPooledDbContextFactory<NZWalksDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("ConnectionString")).LogTo(Console.WriteLine)
 );
 
-builder.Services.AddDbContext<NZWalksAuthDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("AuthConnectionString"))
-);
+//builder.Services.AddDbContext<NZWalksAuthDbContext>(options =>
+//    options.UseSqlServer(builder.Configuration.GetConnectionString("AuthConnectionString"))
+//);
 
 builder.Services.AddHttpContextAccessor();
 

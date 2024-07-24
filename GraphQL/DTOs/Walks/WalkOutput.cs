@@ -1,9 +1,5 @@
 ﻿using NZWalks.Entities;
 using NZWalks.GraphQL.DataLoaders;
-using NZWalks.RESTful.Models.DTO.DifficultyModel;
-using NZWalks.RESTful.Models.DTO.RegionModel;
-using NZWalks.RESTful.Models.DTO.WalkCategoryModel;
-using System.Collections.Generic;
 
 namespace NZWalks.GraphQL.DTOs.Walks
 {
